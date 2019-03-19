@@ -1,0 +1,9 @@
+C:\Users\Anthony\Desktop\Acix\Acix\bin\Debug\Acix.exe.config
+C:\Users\Anthony\Desktop\Acix\Acix\bin\Debug\Acix.exe
+C:\Users\Anthony\Desktop\Acix\Acix\bin\Debug\Acix.pdb
+C:\Users\Anthony\Desktop\Acix\Acix\obj\Debug\Acix.csprojResolveAssemblyReference.cache
+C:\Users\Anthony\Desktop\Acix\Acix\obj\Debug\Acix.Acix.resources
+C:\Users\Anthony\Desktop\Acix\Acix\obj\Debug\Acix.Properties.Resources.resources
+C:\Users\Anthony\Desktop\Acix\Acix\obj\Debug\Acix.csproj.GenerateResource.Cache
+C:\Users\Anthony\Desktop\Acix\Acix\obj\Debug\Acix.exe
+C:\Users\Anthony\Desktop\Acix\Acix\obj\Debug\Acix.pdb
