@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Acix));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Page_productos = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
@@ -131,6 +132,10 @@
             this.button_historial_advertencia_si = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.dataGridView_historial = new System.Windows.Forms.DataGridView();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.Page_productos.SuspendLayout();
             this.tabControl3.SuspendLayout();
@@ -159,6 +164,9 @@
             this.tabPage4.SuspendLayout();
             this.groupBox_historial_advertencia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_historial)).BeginInit();
+            this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -166,8 +174,9 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.Page_productos);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.Page_pedidos);
+            this.tabControl1.Controls.Add(this.Page_productos);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -201,7 +210,7 @@
             this.tabControl3.Location = new System.Drawing.Point(6, 6);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1206, 610);
+            this.tabControl3.Size = new System.Drawing.Size(1206, 771);
             this.tabControl3.TabIndex = 4;
             // 
             // tabPage1
@@ -213,7 +222,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1198, 579);
+            this.tabPage1.Size = new System.Drawing.Size(1198, 740);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Listado";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -271,7 +280,7 @@
             // 
             this.button_listado_eliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_listado_eliminar.Enabled = false;
-            this.button_listado_eliminar.Location = new System.Drawing.Point(1074, 540);
+            this.button_listado_eliminar.Location = new System.Drawing.Point(1074, 701);
             this.button_listado_eliminar.Name = "button_listado_eliminar";
             this.button_listado_eliminar.Size = new System.Drawing.Size(118, 30);
             this.button_listado_eliminar.TabIndex = 3;
@@ -285,10 +294,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_listado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_listado.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView_listado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_listado.Location = new System.Drawing.Point(6, 6);
             this.dataGridView_listado.Name = "dataGridView_listado";
-            this.dataGridView_listado.Size = new System.Drawing.Size(1186, 528);
+            this.dataGridView_listado.Size = new System.Drawing.Size(1186, 689);
             this.dataGridView_listado.TabIndex = 3;
             this.dataGridView_listado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_listado_CellClick);
             // 
@@ -302,7 +312,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1198, 579);
+            this.tabPage2.Size = new System.Drawing.Size(1198, 740);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Nuevo";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1131,7 +1141,7 @@
             this.tabControl4.Location = new System.Drawing.Point(18, 6);
             this.tabControl4.Name = "tabControl4";
             this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(1194, 591);
+            this.tabControl4.Size = new System.Drawing.Size(1194, 752);
             this.tabControl4.TabIndex = 0;
             // 
             // tabPage5
@@ -1145,7 +1155,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1186, 558);
+            this.tabPage5.Size = new System.Drawing.Size(1186, 719);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "Diaria";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1207,10 +1217,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_entrada_diaria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_entrada_diaria.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView_entrada_diaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_entrada_diaria.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView_entrada_diaria.Location = new System.Drawing.Point(6, 6);
             this.dataGridView_entrada_diaria.Name = "dataGridView_entrada_diaria";
-            this.dataGridView_entrada_diaria.Size = new System.Drawing.Size(862, 533);
+            this.dataGridView_entrada_diaria.Size = new System.Drawing.Size(862, 694);
             this.dataGridView_entrada_diaria.TabIndex = 4;
             // 
             // tabPage6
@@ -1224,7 +1236,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 29);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1186, 558);
+            this.tabPage6.Size = new System.Drawing.Size(1186, 719);
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "Mensual";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1286,10 +1298,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_entrada_mensual.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_entrada_mensual.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView_entrada_mensual.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_entrada_mensual.Location = new System.Drawing.Point(6, 6);
             this.dataGridView_entrada_mensual.Name = "dataGridView_entrada_mensual";
-            this.dataGridView_entrada_mensual.Size = new System.Drawing.Size(862, 554);
+            this.dataGridView_entrada_mensual.Size = new System.Drawing.Size(862, 722);
             this.dataGridView_entrada_mensual.TabIndex = 14;
             // 
             // tabPage4
@@ -1309,7 +1322,7 @@
             // 
             this.button_historial_eliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_historial_eliminar.Enabled = false;
-            this.button_historial_eliminar.Location = new System.Drawing.Point(1083, 581);
+            this.button_historial_eliminar.Location = new System.Drawing.Point(1083, 742);
             this.button_historial_eliminar.Name = "button_historial_eliminar";
             this.button_historial_eliminar.Size = new System.Drawing.Size(118, 30);
             this.button_historial_eliminar.TabIndex = 7;
@@ -1377,13 +1390,59 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView_historial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_historial.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView_historial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_historial.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dataGridView_historial.Location = new System.Drawing.Point(15, 6);
             this.dataGridView_historial.Name = "dataGridView_historial";
-            this.dataGridView_historial.Size = new System.Drawing.Size(1186, 569);
+            this.dataGridView_historial.Size = new System.Drawing.Size(1186, 730);
             this.dataGridView_historial.TabIndex = 4;
             this.dataGridView_historial.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_historial_CellClick);
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.panel1);
+            this.tabPage7.Location = new System.Drawing.Point(4, 24);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(1218, 619);
+            this.tabPage7.TabIndex = 4;
+            this.tabPage7.Text = "Inicio";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(25, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(930, 524);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Sitka Subheading", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(245, 530);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(497, 30);
+            this.label29.TabIndex = 4;
+            this.label29.Text = "Programa para la administracíón de filtros y aceites";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoScroll = true;
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.label29);
+            this.panel1.Location = new System.Drawing.Point(157, 40);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(972, 573);
+            this.panel1.TabIndex = 6;
             // 
             // Acix
             // 
@@ -1391,6 +1450,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1240, 679);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Acix";
             this.Text = "Acix";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -1438,6 +1498,11 @@
             this.groupBox_historial_advertencia.ResumeLayout(false);
             this.groupBox_historial_advertencia.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_historial)).EndInit();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1547,6 +1612,10 @@
         private System.Windows.Forms.DataGridView dataGridView_entrada_mensual;
         private System.Windows.Forms.MonthCalendar monthCalendar_entrada_diaria;
         private System.Windows.Forms.MonthCalendar monthCalendar_entrada_mensual;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label29;
     }
 }
 
