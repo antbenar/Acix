@@ -30,6 +30,53 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Acix));
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.Page_pedidos = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_equivalencias = new System.Windows.Forms.Button();
+            this.label_res_ptotal = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.button_vender = new System.Windows.Forms.Button();
+            this.textBox_cantidad = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label_res_pv = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label_res_stock = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label_res_descripcion = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.Tab_Descripcion = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.Btn_descripcion = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox_contenido = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox_marca = new System.Windows.Forms.ComboBox();
+            this.comboBox_unidad = new System.Windows.Forms.ComboBox();
+            this.comboBox_grado = new System.Windows.Forms.ComboBox();
+            this.tab_cod = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox_codigo = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox_Equivalencias = new System.Windows.Forms.GroupBox();
+            this.button_equivalencia_cerrar = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label_equivalencias_desc = new System.Windows.Forms.Label();
+            this.button_equivalencia_sel = new System.Windows.Forms.Button();
+            this.label31 = new System.Windows.Forms.Label();
+            this.listBox_equivalencias = new System.Windows.Forms.ListBox();
+            this.groupBox_Resultado = new System.Windows.Forms.GroupBox();
+            this.button_resultado_cerrar = new System.Windows.Forms.Button();
+            this.listBox_Buscar = new System.Windows.Forms.ListBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button_seleccionar_item_list = new System.Windows.Forms.Button();
             this.Page_productos = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -66,49 +113,21 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.Page_pedidos = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button_equivalencias = new System.Windows.Forms.Button();
-            this.label_res_ptotal = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.button_vender = new System.Windows.Forms.Button();
-            this.textBox_cantidad = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label_res_pv = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label_res_stock = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label_res_descripcion = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.Tab_Descripcion = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBox_marca = new System.Windows.Forms.ComboBox();
-            this.comboBox_grado = new System.Windows.Forms.ComboBox();
-            this.comboBox_contenido = new System.Windows.Forms.ComboBox();
-            this.comboBox_unidad = new System.Windows.Forms.ComboBox();
-            this.Btn_descripcion = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tab_cod = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox_codigo = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox_Equivalencias = new System.Windows.Forms.GroupBox();
-            this.button_equivalencia_cerrar = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label_equivalencias_desc = new System.Windows.Forms.Label();
-            this.button_equivalencia_sel = new System.Windows.Forms.Button();
-            this.label31 = new System.Windows.Forms.Label();
-            this.listBox_equivalencias = new System.Windows.Forms.ListBox();
-            this.groupBox_Resultado = new System.Windows.Forms.GroupBox();
-            this.button_resultado_cerrar = new System.Windows.Forms.Button();
-            this.listBox_Buscar = new System.Windows.Forms.ListBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.button_seleccionar_item_list = new System.Windows.Forms.Button();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.button_anadir_equivalentes__crear = new System.Windows.Forms.Button();
+            this.label_anadir_equivalentes_desc = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.button_anadir_equivalentes_selec = new System.Windows.Forms.Button();
+            this.textBox_anadir_equivalentes_codigo = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.button_anadir_equivalentes_quitar = new System.Windows.Forms.Button();
+            this.button_anadir_equivalentes_anadir = new System.Windows.Forms.Button();
+            this.textBox_anadir_equivalentes_grado = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.listBox_anadir_equivalentes = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -132,20 +151,10 @@
             this.button_historial_advertencia_si = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.dataGridView_historial = new System.Windows.Forms.DataGridView();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
-            this.Page_productos.SuspendLayout();
-            this.tabControl3.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.groupBox_listado_advertencia.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_listado)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            this.groupBox_nuevo_equivalentes.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.Page_pedidos.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -155,6 +164,17 @@
             this.tab_cod.SuspendLayout();
             this.groupBox_Equivalencias.SuspendLayout();
             this.groupBox_Resultado.SuspendLayout();
+            this.Page_productos.SuspendLayout();
+            this.tabControl3.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.groupBox_listado_advertencia.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_listado)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            this.groupBox_nuevo_equivalentes.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -164,9 +184,6 @@
             this.tabPage4.SuspendLayout();
             this.groupBox_historial_advertencia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_historial)).BeginInit();
-            this.tabPage7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -184,422 +201,54 @@
             this.tabControl1.Location = new System.Drawing.Point(2, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1226, 647);
+            this.tabControl1.Size = new System.Drawing.Size(1226, 583);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControl1.TabIndex = 0;
             // 
-            // Page_productos
+            // tabPage7
             // 
-            this.Page_productos.Controls.Add(this.tabControl3);
-            this.Page_productos.Location = new System.Drawing.Point(4, 24);
-            this.Page_productos.Name = "Page_productos";
-            this.Page_productos.Padding = new System.Windows.Forms.Padding(3);
-            this.Page_productos.Size = new System.Drawing.Size(1218, 619);
-            this.Page_productos.TabIndex = 0;
-            this.Page_productos.Text = "Productos";
-            this.Page_productos.UseVisualStyleBackColor = true;
+            this.tabPage7.Controls.Add(this.panel1);
+            this.tabPage7.Location = new System.Drawing.Point(4, 24);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(1218, 555);
+            this.tabPage7.TabIndex = 4;
+            this.tabPage7.Text = "Inicio";
+            this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // tabControl3
+            // panel1
             // 
-            this.tabControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl3.Controls.Add(this.tabPage1);
-            this.tabControl3.Controls.Add(this.tabPage2);
-            this.tabControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl3.Location = new System.Drawing.Point(6, 6);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1206, 771);
-            this.tabControl3.TabIndex = 4;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.groupBox_listado_advertencia);
-            this.tabPage1.Controls.Add(this.button_listado_eliminar);
-            this.tabPage1.Controls.Add(this.dataGridView_listado);
-            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 27);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1198, 740);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Listado";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox_listado_advertencia
-            // 
-            this.groupBox_listado_advertencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox_listado_advertencia.AutoSize = true;
-            this.groupBox_listado_advertencia.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox_listado_advertencia.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.groupBox_listado_advertencia.Controls.Add(this.button_listado_advertencia_no);
-            this.groupBox_listado_advertencia.Controls.Add(this.button_listado_advertencia_si);
-            this.groupBox_listado_advertencia.Controls.Add(this.label26);
-            this.groupBox_listado_advertencia.Location = new System.Drawing.Point(378, 180);
-            this.groupBox_listado_advertencia.Name = "groupBox_listado_advertencia";
-            this.groupBox_listado_advertencia.Size = new System.Drawing.Size(434, 123);
-            this.groupBox_listado_advertencia.TabIndex = 4;
-            this.groupBox_listado_advertencia.TabStop = false;
-            this.groupBox_listado_advertencia.Text = "Advertencia";
-            this.groupBox_listado_advertencia.Visible = false;
-            // 
-            // button_listado_advertencia_no
-            // 
-            this.button_listado_advertencia_no.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_listado_advertencia_no.Location = new System.Drawing.Point(339, 72);
-            this.button_listado_advertencia_no.Name = "button_listado_advertencia_no";
-            this.button_listado_advertencia_no.Size = new System.Drawing.Size(75, 26);
-            this.button_listado_advertencia_no.TabIndex = 2;
-            this.button_listado_advertencia_no.Text = "No";
-            this.button_listado_advertencia_no.UseVisualStyleBackColor = true;
-            this.button_listado_advertencia_no.Click += new System.EventHandler(this.button_listado_advertencia_no_Click);
-            // 
-            // button_listado_advertencia_si
-            // 
-            this.button_listado_advertencia_si.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_listado_advertencia_si.Location = new System.Drawing.Point(258, 72);
-            this.button_listado_advertencia_si.Name = "button_listado_advertencia_si";
-            this.button_listado_advertencia_si.Size = new System.Drawing.Size(75, 26);
-            this.button_listado_advertencia_si.TabIndex = 1;
-            this.button_listado_advertencia_si.Text = "Si";
-            this.button_listado_advertencia_si.UseVisualStyleBackColor = true;
-            this.button_listado_advertencia_si.Click += new System.EventHandler(this.button_listado_advertencia_si_Click);
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(27, 35);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(373, 20);
-            this.label26.TabIndex = 0;
-            this.label26.Text = "¿Está seguro de eliminar el producto seleccionado?";
-            // 
-            // button_listado_eliminar
-            // 
-            this.button_listado_eliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_listado_eliminar.Enabled = false;
-            this.button_listado_eliminar.Location = new System.Drawing.Point(1074, 701);
-            this.button_listado_eliminar.Name = "button_listado_eliminar";
-            this.button_listado_eliminar.Size = new System.Drawing.Size(118, 30);
-            this.button_listado_eliminar.TabIndex = 3;
-            this.button_listado_eliminar.Text = "Eliminar";
-            this.button_listado_eliminar.UseVisualStyleBackColor = true;
-            this.button_listado_eliminar.Click += new System.EventHandler(this.button_listado_eliminar_Click);
-            // 
-            // dataGridView_listado
-            // 
-            this.dataGridView_listado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView_listado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView_listado.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataGridView_listado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_listado.Location = new System.Drawing.Point(6, 6);
-            this.dataGridView_listado.Name = "dataGridView_listado";
-            this.dataGridView_listado.Size = new System.Drawing.Size(1186, 689);
-            this.dataGridView_listado.TabIndex = 3;
-            this.dataGridView_listado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_listado_CellClick);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox_nuevo_equivalentes);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage2.Controls.Add(this.button_nuevo_crear);
-            this.tabPage2.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1198, 740);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Nuevo";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox_nuevo_equivalentes
-            // 
-            this.groupBox_nuevo_equivalentes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox_nuevo_equivalentes.Controls.Add(this.label23);
-            this.groupBox_nuevo_equivalentes.Controls.Add(this.button_nuevo_quitar);
-            this.groupBox_nuevo_equivalentes.Controls.Add(this.button_nuevo_anadir);
-            this.groupBox_nuevo_equivalentes.Controls.Add(this.textBox_nuevo_codigo);
-            this.groupBox_nuevo_equivalentes.Controls.Add(this.label22);
-            this.groupBox_nuevo_equivalentes.Controls.Add(this.label15);
-            this.groupBox_nuevo_equivalentes.Controls.Add(this.listBox_nuevo_equivalentes);
-            this.groupBox_nuevo_equivalentes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_nuevo_equivalentes.Location = new System.Drawing.Point(75, 259);
-            this.groupBox_nuevo_equivalentes.Name = "groupBox_nuevo_equivalentes";
-            this.groupBox_nuevo_equivalentes.Size = new System.Drawing.Size(1023, 254);
-            this.groupBox_nuevo_equivalentes.TabIndex = 23;
-            this.groupBox_nuevo_equivalentes.TabStop = false;
-            this.groupBox_nuevo_equivalentes.Text = "Seleccionar Equivalentes:";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(341, 18);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(180, 20);
-            this.label23.TabIndex = 36;
-            this.label23.Text = "Productos Equivalentes:";
-            // 
-            // button_nuevo_quitar
-            // 
-            this.button_nuevo_quitar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_nuevo_quitar.Enabled = false;
-            this.button_nuevo_quitar.Location = new System.Drawing.Point(832, 199);
-            this.button_nuevo_quitar.Name = "button_nuevo_quitar";
-            this.button_nuevo_quitar.Size = new System.Drawing.Size(169, 30);
-            this.button_nuevo_quitar.TabIndex = 35;
-            this.button_nuevo_quitar.Text = "Quitar de la lista";
-            this.button_nuevo_quitar.UseVisualStyleBackColor = true;
-            this.button_nuevo_quitar.Click += new System.EventHandler(this.button_nuevo_quitar_Click);
-            // 
-            // button_nuevo_anadir
-            // 
-            this.button_nuevo_anadir.Enabled = false;
-            this.button_nuevo_anadir.Location = new System.Drawing.Point(55, 128);
-            this.button_nuevo_anadir.Name = "button_nuevo_anadir";
-            this.button_nuevo_anadir.Size = new System.Drawing.Size(169, 30);
-            this.button_nuevo_anadir.TabIndex = 34;
-            this.button_nuevo_anadir.Text = "Añadir a la lista";
-            this.button_nuevo_anadir.UseVisualStyleBackColor = true;
-            this.button_nuevo_anadir.Click += new System.EventHandler(this.button_nuevo_anadir_Click);
-            // 
-            // textBox_nuevo_codigo
-            // 
-            this.textBox_nuevo_codigo.Location = new System.Drawing.Point(55, 83);
-            this.textBox_nuevo_codigo.Name = "textBox_nuevo_codigo";
-            this.textBox_nuevo_codigo.Size = new System.Drawing.Size(168, 26);
-            this.textBox_nuevo_codigo.TabIndex = 33;
-            this.textBox_nuevo_codigo.TextChanged += new System.EventHandler(this.textBox_nuevo_codigo_TextChanged);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(51, 47);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(218, 20);
-            this.label22.TabIndex = 32;
-            this.label22.Text = "Código Producto Equivalente:";
-            // 
-            // label15
-            // 
-            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(341, 62);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(368, 20);
-            this.label15.TabIndex = 4;
-            this.label15.Text = "Código / Marca / Grado / Contenido / Unidad ";
-            // 
-            // listBox_nuevo_equivalentes
-            // 
-            this.listBox_nuevo_equivalentes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox_nuevo_equivalentes.FormattingEnabled = true;
-            this.listBox_nuevo_equivalentes.ItemHeight = 20;
-            this.listBox_nuevo_equivalentes.Location = new System.Drawing.Point(345, 85);
-            this.listBox_nuevo_equivalentes.Name = "listBox_nuevo_equivalentes";
-            this.listBox_nuevo_equivalentes.Size = new System.Drawing.Size(465, 144);
-            this.listBox_nuevo_equivalentes.TabIndex = 0;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(65, 30);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(274, 20);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "Ingrese los datos del nuevo producto:";
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel3.ColumnCount = 5;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.tableLayoutPanel3.Controls.Add(this.textBox_nuevo_stock, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox_nuevo_precio_venta, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox_nuevo_precioCompra, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label11, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label12, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label13, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(69, 144);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1032, 71);
-            this.tableLayoutPanel3.TabIndex = 3;
-            // 
-            // textBox_nuevo_stock
-            // 
-            this.textBox_nuevo_stock.Location = new System.Drawing.Point(3, 38);
-            this.textBox_nuevo_stock.Name = "textBox_nuevo_stock";
-            this.textBox_nuevo_stock.Size = new System.Drawing.Size(168, 24);
-            this.textBox_nuevo_stock.TabIndex = 31;
-            this.textBox_nuevo_stock.TextChanged += new System.EventHandler(this.textBox_nuevo_stock_TextChanged);
-            // 
-            // textBox_nuevo_precio_venta
-            // 
-            this.textBox_nuevo_precio_venta.Location = new System.Drawing.Point(230, 38);
-            this.textBox_nuevo_precio_venta.Name = "textBox_nuevo_precio_venta";
-            this.textBox_nuevo_precio_venta.Size = new System.Drawing.Size(168, 24);
-            this.textBox_nuevo_precio_venta.TabIndex = 30;
-            this.textBox_nuevo_precio_venta.TextChanged += new System.EventHandler(this.textBox_nuevo_precio_venta_TextChanged);
-            // 
-            // textBox_nuevo_precioCompra
-            // 
-            this.textBox_nuevo_precioCompra.Location = new System.Drawing.Point(457, 38);
-            this.textBox_nuevo_precioCompra.Name = "textBox_nuevo_precioCompra";
-            this.textBox_nuevo_precioCompra.Size = new System.Drawing.Size(168, 24);
-            this.textBox_nuevo_precioCompra.TabIndex = 29;
-            this.textBox_nuevo_precioCompra.TextChanged += new System.EventHandler(this.textBox_nuevo_precioCompra_TextChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(457, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(113, 18);
-            this.label11.TabIndex = 23;
-            this.label11.Text = "Precio Compra:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(230, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(96, 18);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "Precio Venta:";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(3, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 18);
-            this.label13.TabIndex = 21;
-            this.label13.Text = "Stock:";
-            // 
-            // button_nuevo_crear
-            // 
-            this.button_nuevo_crear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_nuevo_crear.Enabled = false;
-            this.button_nuevo_crear.Location = new System.Drawing.Point(980, 532);
-            this.button_nuevo_crear.Name = "button_nuevo_crear";
-            this.button_nuevo_crear.Size = new System.Drawing.Size(118, 30);
-            this.button_nuevo_crear.TabIndex = 2;
-            this.button_nuevo_crear.Text = "Crear";
-            this.button_nuevo_crear.UseVisualStyleBackColor = true;
-            this.button_nuevo_crear.Click += new System.EventHandler(this.button_nuevo_crear_Click);
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 5;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.tableLayoutPanel2.Controls.Add(this.textBox_nuevo_marca, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBox_nuevo_grado, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBox_nuevo_contenido, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBox_nuevo_unidad, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label1, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label7, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label8, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(69, 67);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1032, 71);
-            this.tableLayoutPanel2.TabIndex = 2;
-            // 
-            // textBox_nuevo_marca
-            // 
-            this.textBox_nuevo_marca.Location = new System.Drawing.Point(3, 38);
-            this.textBox_nuevo_marca.Name = "textBox_nuevo_marca";
-            this.textBox_nuevo_marca.Size = new System.Drawing.Size(168, 24);
-            this.textBox_nuevo_marca.TabIndex = 31;
-            this.textBox_nuevo_marca.TextChanged += new System.EventHandler(this.textBox_nuevo_marca_TextChanged);
-            // 
-            // textBox_nuevo_grado
-            // 
-            this.textBox_nuevo_grado.Location = new System.Drawing.Point(230, 38);
-            this.textBox_nuevo_grado.Name = "textBox_nuevo_grado";
-            this.textBox_nuevo_grado.Size = new System.Drawing.Size(168, 24);
-            this.textBox_nuevo_grado.TabIndex = 30;
-            this.textBox_nuevo_grado.TextChanged += new System.EventHandler(this.textBox_nuevo_grado_TextChanged);
-            // 
-            // textBox_nuevo_contenido
-            // 
-            this.textBox_nuevo_contenido.Location = new System.Drawing.Point(457, 38);
-            this.textBox_nuevo_contenido.Name = "textBox_nuevo_contenido";
-            this.textBox_nuevo_contenido.Size = new System.Drawing.Size(168, 24);
-            this.textBox_nuevo_contenido.TabIndex = 29;
-            this.textBox_nuevo_contenido.TextChanged += new System.EventHandler(this.textBox_nuevo_contenido_TextChanged);
-            // 
-            // textBox_nuevo_unidad
-            // 
-            this.textBox_nuevo_unidad.Location = new System.Drawing.Point(684, 38);
-            this.textBox_nuevo_unidad.Name = "textBox_nuevo_unidad";
-            this.textBox_nuevo_unidad.Size = new System.Drawing.Size(168, 24);
-            this.textBox_nuevo_unidad.TabIndex = 28;
-            this.textBox_nuevo_unidad.TextChanged += new System.EventHandler(this.textBox_nuevo_unidad_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(684, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 18);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Unidad:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(457, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(80, 18);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "Contenido:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(230, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(54, 18);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "Grado:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(54, 18);
-            this.label9.TabIndex = 21;
-            this.label9.Text = "Marca:";
+            this.panel1.AutoScroll = true;
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.label29);
+            this.panel1.Location = new System.Drawing.Point(157, 40);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(972, 560);
+            this.panel1.TabIndex = 6;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(25, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(930, 524);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Sitka Subheading", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(245, 530);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(497, 30);
+            this.label29.TabIndex = 4;
+            this.label29.Text = "Programa para la administracíón de filtros y aceites";
             // 
             // Page_pedidos
             // 
@@ -610,7 +259,7 @@
             this.Page_pedidos.Location = new System.Drawing.Point(4, 24);
             this.Page_pedidos.Name = "Page_pedidos";
             this.Page_pedidos.Padding = new System.Windows.Forms.Padding(3);
-            this.Page_pedidos.Size = new System.Drawing.Size(1218, 619);
+            this.Page_pedidos.Size = new System.Drawing.Size(1218, 555);
             this.Page_pedidos.TabIndex = 1;
             this.Page_pedidos.Text = "Pedidos";
             this.Page_pedidos.UseVisualStyleBackColor = true;
@@ -812,15 +461,15 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
-            this.tableLayoutPanel1.Controls.Add(this.comboBox_marca, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox_grado, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox_contenido, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox_unidad, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.Btn_descripcion, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.label6, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox_contenido, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox_marca, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox_unidad, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox_grado, 2, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(27, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -829,49 +478,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1032, 67);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // comboBox_marca
-            // 
-            this.comboBox_marca.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBox_marca.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox_marca.FormattingEnabled = true;
-            this.comboBox_marca.Location = new System.Drawing.Point(3, 36);
-            this.comboBox_marca.Name = "comboBox_marca";
-            this.comboBox_marca.Size = new System.Drawing.Size(165, 28);
-            this.comboBox_marca.TabIndex = 28;
-            this.comboBox_marca.SelectedValueChanged += new System.EventHandler(this.comboBox_marca_SelectedValueChanged);
-            // 
-            // comboBox_grado
-            // 
-            this.comboBox_grado.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBox_grado.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox_grado.FormattingEnabled = true;
-            this.comboBox_grado.Location = new System.Drawing.Point(230, 36);
-            this.comboBox_grado.Name = "comboBox_grado";
-            this.comboBox_grado.Size = new System.Drawing.Size(165, 28);
-            this.comboBox_grado.TabIndex = 27;
-            this.comboBox_grado.SelectedValueChanged += new System.EventHandler(this.comboBox_grado_SelectedValueChanged);
-            // 
-            // comboBox_contenido
-            // 
-            this.comboBox_contenido.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBox_contenido.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox_contenido.FormattingEnabled = true;
-            this.comboBox_contenido.Location = new System.Drawing.Point(457, 36);
-            this.comboBox_contenido.Name = "comboBox_contenido";
-            this.comboBox_contenido.Size = new System.Drawing.Size(165, 28);
-            this.comboBox_contenido.TabIndex = 26;
-            this.comboBox_contenido.SelectedValueChanged += new System.EventHandler(this.comboBox_contenido_SelectedValueChanged);
-            // 
-            // comboBox_unidad
-            // 
-            this.comboBox_unidad.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBox_unidad.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox_unidad.FormattingEnabled = true;
-            this.comboBox_unidad.Location = new System.Drawing.Point(684, 36);
-            this.comboBox_unidad.Name = "comboBox_unidad";
-            this.comboBox_unidad.Size = new System.Drawing.Size(165, 28);
-            this.comboBox_unidad.TabIndex = 25;
             // 
             // Btn_descripcion
             // 
@@ -898,29 +504,72 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(457, 0);
+            this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 20);
             this.label5.TabIndex = 23;
             this.label5.Text = "Contenido:";
             // 
+            // comboBox_contenido
+            // 
+            this.comboBox_contenido.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBox_contenido.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox_contenido.FormattingEnabled = true;
+            this.comboBox_contenido.Location = new System.Drawing.Point(3, 36);
+            this.comboBox_contenido.Name = "comboBox_contenido";
+            this.comboBox_contenido.Size = new System.Drawing.Size(221, 28);
+            this.comboBox_contenido.TabIndex = 26;
+            this.comboBox_contenido.SelectedValueChanged += new System.EventHandler(this.comboBox_contenido_SelectedValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(230, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 20);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Marca:";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(230, 0);
+            this.label4.Location = new System.Drawing.Point(457, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 20);
             this.label4.TabIndex = 22;
             this.label4.Text = "Grado:";
             // 
-            // label3
+            // comboBox_marca
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 20);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "Marca:";
+            this.comboBox_marca.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBox_marca.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox_marca.FormattingEnabled = true;
+            this.comboBox_marca.Location = new System.Drawing.Point(230, 36);
+            this.comboBox_marca.Name = "comboBox_marca";
+            this.comboBox_marca.Size = new System.Drawing.Size(221, 28);
+            this.comboBox_marca.TabIndex = 28;
+            this.comboBox_marca.SelectedValueChanged += new System.EventHandler(this.comboBox_marca_SelectedValueChanged);
+            // 
+            // comboBox_unidad
+            // 
+            this.comboBox_unidad.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBox_unidad.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox_unidad.FormattingEnabled = true;
+            this.comboBox_unidad.Location = new System.Drawing.Point(684, 36);
+            this.comboBox_unidad.Name = "comboBox_unidad";
+            this.comboBox_unidad.Size = new System.Drawing.Size(221, 28);
+            this.comboBox_unidad.TabIndex = 25;
+            // 
+            // comboBox_grado
+            // 
+            this.comboBox_grado.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBox_grado.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox_grado.FormattingEnabled = true;
+            this.comboBox_grado.Location = new System.Drawing.Point(457, 36);
+            this.comboBox_grado.Name = "comboBox_grado";
+            this.comboBox_grado.Size = new System.Drawing.Size(221, 28);
+            this.comboBox_grado.TabIndex = 27;
+            this.comboBox_grado.SelectedValueChanged += new System.EventHandler(this.comboBox_grado_SelectedValueChanged);
             // 
             // tab_cod
             // 
@@ -937,11 +586,9 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(292, 57);
+            this.button1.Location = new System.Drawing.Point(252, 57);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 30);
+            this.button1.Size = new System.Drawing.Size(113, 30);
             this.button1.TabIndex = 4;
             this.button1.Text = "Seleccionar";
             this.button1.UseVisualStyleBackColor = true;
@@ -949,11 +596,9 @@
             // 
             // textBox_codigo
             // 
-            this.textBox_codigo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_codigo.Location = new System.Drawing.Point(36, 59);
             this.textBox_codigo.Name = "textBox_codigo";
-            this.textBox_codigo.Size = new System.Drawing.Size(133, 26);
+            this.textBox_codigo.Size = new System.Drawing.Size(189, 26);
             this.textBox_codigo.TabIndex = 3;
             // 
             // label2
@@ -1120,13 +765,601 @@
             this.button_seleccionar_item_list.UseVisualStyleBackColor = true;
             this.button_seleccionar_item_list.Click += new System.EventHandler(this.button_seleccionar_item_list_Click);
             // 
+            // Page_productos
+            // 
+            this.Page_productos.Controls.Add(this.tabControl3);
+            this.Page_productos.Location = new System.Drawing.Point(4, 24);
+            this.Page_productos.Name = "Page_productos";
+            this.Page_productos.Padding = new System.Windows.Forms.Padding(3);
+            this.Page_productos.Size = new System.Drawing.Size(1218, 555);
+            this.Page_productos.TabIndex = 0;
+            this.Page_productos.Text = "Productos";
+            this.Page_productos.UseVisualStyleBackColor = true;
+            // 
+            // tabControl3
+            // 
+            this.tabControl3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl3.Controls.Add(this.tabPage1);
+            this.tabControl3.Controls.Add(this.tabPage2);
+            this.tabControl3.Controls.Add(this.tabPage8);
+            this.tabControl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl3.Location = new System.Drawing.Point(6, 6);
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(1206, 707);
+            this.tabControl3.TabIndex = 4;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox_listado_advertencia);
+            this.tabPage1.Controls.Add(this.button_listado_eliminar);
+            this.tabPage1.Controls.Add(this.dataGridView_listado);
+            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1198, 674);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Listado";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_listado_advertencia
+            // 
+            this.groupBox_listado_advertencia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox_listado_advertencia.AutoSize = true;
+            this.groupBox_listado_advertencia.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBox_listado_advertencia.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox_listado_advertencia.Controls.Add(this.button_listado_advertencia_no);
+            this.groupBox_listado_advertencia.Controls.Add(this.button_listado_advertencia_si);
+            this.groupBox_listado_advertencia.Controls.Add(this.label26);
+            this.groupBox_listado_advertencia.Location = new System.Drawing.Point(378, 180);
+            this.groupBox_listado_advertencia.Name = "groupBox_listado_advertencia";
+            this.groupBox_listado_advertencia.Size = new System.Drawing.Size(434, 123);
+            this.groupBox_listado_advertencia.TabIndex = 4;
+            this.groupBox_listado_advertencia.TabStop = false;
+            this.groupBox_listado_advertencia.Text = "Advertencia";
+            this.groupBox_listado_advertencia.Visible = false;
+            // 
+            // button_listado_advertencia_no
+            // 
+            this.button_listado_advertencia_no.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_listado_advertencia_no.Location = new System.Drawing.Point(339, 72);
+            this.button_listado_advertencia_no.Name = "button_listado_advertencia_no";
+            this.button_listado_advertencia_no.Size = new System.Drawing.Size(75, 26);
+            this.button_listado_advertencia_no.TabIndex = 2;
+            this.button_listado_advertencia_no.Text = "No";
+            this.button_listado_advertencia_no.UseVisualStyleBackColor = true;
+            this.button_listado_advertencia_no.Click += new System.EventHandler(this.button_listado_advertencia_no_Click);
+            // 
+            // button_listado_advertencia_si
+            // 
+            this.button_listado_advertencia_si.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_listado_advertencia_si.Location = new System.Drawing.Point(258, 72);
+            this.button_listado_advertencia_si.Name = "button_listado_advertencia_si";
+            this.button_listado_advertencia_si.Size = new System.Drawing.Size(75, 26);
+            this.button_listado_advertencia_si.TabIndex = 1;
+            this.button_listado_advertencia_si.Text = "Si";
+            this.button_listado_advertencia_si.UseVisualStyleBackColor = true;
+            this.button_listado_advertencia_si.Click += new System.EventHandler(this.button_listado_advertencia_si_Click);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(27, 35);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(373, 20);
+            this.label26.TabIndex = 0;
+            this.label26.Text = "¿Está seguro de eliminar el producto seleccionado?";
+            // 
+            // button_listado_eliminar
+            // 
+            this.button_listado_eliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_listado_eliminar.Enabled = false;
+            this.button_listado_eliminar.Location = new System.Drawing.Point(1074, 635);
+            this.button_listado_eliminar.Name = "button_listado_eliminar";
+            this.button_listado_eliminar.Size = new System.Drawing.Size(118, 30);
+            this.button_listado_eliminar.TabIndex = 3;
+            this.button_listado_eliminar.Text = "Eliminar";
+            this.button_listado_eliminar.UseVisualStyleBackColor = true;
+            this.button_listado_eliminar.Click += new System.EventHandler(this.button_listado_eliminar_Click);
+            // 
+            // dataGridView_listado
+            // 
+            this.dataGridView_listado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView_listado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView_listado.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridView_listado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_listado.GridColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridView_listado.Location = new System.Drawing.Point(9, 6);
+            this.dataGridView_listado.Name = "dataGridView_listado";
+            this.dataGridView_listado.Size = new System.Drawing.Size(1186, 508);
+            this.dataGridView_listado.TabIndex = 3;
+            this.dataGridView_listado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_listado_CellClick);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox_nuevo_equivalentes);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.tableLayoutPanel3);
+            this.tabPage2.Controls.Add(this.button_nuevo_crear);
+            this.tabPage2.Controls.Add(this.tableLayoutPanel2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1198, 674);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Nuevo";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_nuevo_equivalentes
+            // 
+            this.groupBox_nuevo_equivalentes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox_nuevo_equivalentes.Controls.Add(this.label23);
+            this.groupBox_nuevo_equivalentes.Controls.Add(this.button_nuevo_quitar);
+            this.groupBox_nuevo_equivalentes.Controls.Add(this.button_nuevo_anadir);
+            this.groupBox_nuevo_equivalentes.Controls.Add(this.textBox_nuevo_codigo);
+            this.groupBox_nuevo_equivalentes.Controls.Add(this.label22);
+            this.groupBox_nuevo_equivalentes.Controls.Add(this.label15);
+            this.groupBox_nuevo_equivalentes.Controls.Add(this.listBox_nuevo_equivalentes);
+            this.groupBox_nuevo_equivalentes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox_nuevo_equivalentes.Location = new System.Drawing.Point(75, 259);
+            this.groupBox_nuevo_equivalentes.Name = "groupBox_nuevo_equivalentes";
+            this.groupBox_nuevo_equivalentes.Size = new System.Drawing.Size(1084, 254);
+            this.groupBox_nuevo_equivalentes.TabIndex = 23;
+            this.groupBox_nuevo_equivalentes.TabStop = false;
+            this.groupBox_nuevo_equivalentes.Text = "Seleccionar equivalentes para el nuevo producto:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(370, 22);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(180, 20);
+            this.label23.TabIndex = 36;
+            this.label23.Text = "Productos Equivalentes:";
+            // 
+            // button_nuevo_quitar
+            // 
+            this.button_nuevo_quitar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_nuevo_quitar.Enabled = false;
+            this.button_nuevo_quitar.Location = new System.Drawing.Point(893, 199);
+            this.button_nuevo_quitar.Name = "button_nuevo_quitar";
+            this.button_nuevo_quitar.Size = new System.Drawing.Size(169, 30);
+            this.button_nuevo_quitar.TabIndex = 35;
+            this.button_nuevo_quitar.Text = "Quitar de la lista";
+            this.button_nuevo_quitar.UseVisualStyleBackColor = true;
+            this.button_nuevo_quitar.Click += new System.EventHandler(this.button_nuevo_quitar_Click);
+            // 
+            // button_nuevo_anadir
+            // 
+            this.button_nuevo_anadir.Enabled = false;
+            this.button_nuevo_anadir.Location = new System.Drawing.Point(96, 117);
+            this.button_nuevo_anadir.Name = "button_nuevo_anadir";
+            this.button_nuevo_anadir.Size = new System.Drawing.Size(169, 30);
+            this.button_nuevo_anadir.TabIndex = 34;
+            this.button_nuevo_anadir.Text = "Añadir a la lista";
+            this.button_nuevo_anadir.UseVisualStyleBackColor = true;
+            this.button_nuevo_anadir.Click += new System.EventHandler(this.button_nuevo_anadir_Click);
+            // 
+            // textBox_nuevo_codigo
+            // 
+            this.textBox_nuevo_codigo.Location = new System.Drawing.Point(96, 85);
+            this.textBox_nuevo_codigo.Name = "textBox_nuevo_codigo";
+            this.textBox_nuevo_codigo.Size = new System.Drawing.Size(168, 26);
+            this.textBox_nuevo_codigo.TabIndex = 33;
+            this.textBox_nuevo_codigo.TextChanged += new System.EventHandler(this.textBox_nuevo_codigo_TextChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(18, 46);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(317, 20);
+            this.label22.TabIndex = 32;
+            this.label22.Text = "Código del Grado del Producto Equivalente:";
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(370, 62);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(368, 20);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "Código / Marca / Grado / Contenido / Unidad ";
+            // 
+            // listBox_nuevo_equivalentes
+            // 
+            this.listBox_nuevo_equivalentes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox_nuevo_equivalentes.FormattingEnabled = true;
+            this.listBox_nuevo_equivalentes.ItemHeight = 20;
+            this.listBox_nuevo_equivalentes.Location = new System.Drawing.Point(374, 85);
+            this.listBox_nuevo_equivalentes.Name = "listBox_nuevo_equivalentes";
+            this.listBox_nuevo_equivalentes.Size = new System.Drawing.Size(497, 144);
+            this.listBox_nuevo_equivalentes.TabIndex = 0;
+            this.listBox_nuevo_equivalentes.SelectedIndexChanged += new System.EventHandler(this.listBox_nuevo_equivalentes_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(65, 30);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(274, 20);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Ingrese los datos del nuevo producto:";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.ColumnCount = 5;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel3.Controls.Add(this.textBox_nuevo_stock, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox_nuevo_precio_venta, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox_nuevo_precioCompra, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label11, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label12, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label13, 0, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(69, 144);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1032, 71);
+            this.tableLayoutPanel3.TabIndex = 3;
+            // 
+            // textBox_nuevo_stock
+            // 
+            this.textBox_nuevo_stock.Location = new System.Drawing.Point(3, 38);
+            this.textBox_nuevo_stock.Name = "textBox_nuevo_stock";
+            this.textBox_nuevo_stock.Size = new System.Drawing.Size(221, 26);
+            this.textBox_nuevo_stock.TabIndex = 31;
+            this.textBox_nuevo_stock.TextChanged += new System.EventHandler(this.textBox_nuevo_stock_TextChanged);
+            // 
+            // textBox_nuevo_precio_venta
+            // 
+            this.textBox_nuevo_precio_venta.Location = new System.Drawing.Point(230, 38);
+            this.textBox_nuevo_precio_venta.Name = "textBox_nuevo_precio_venta";
+            this.textBox_nuevo_precio_venta.Size = new System.Drawing.Size(221, 26);
+            this.textBox_nuevo_precio_venta.TabIndex = 30;
+            this.textBox_nuevo_precio_venta.TextChanged += new System.EventHandler(this.textBox_nuevo_precio_venta_TextChanged);
+            // 
+            // textBox_nuevo_precioCompra
+            // 
+            this.textBox_nuevo_precioCompra.Location = new System.Drawing.Point(457, 38);
+            this.textBox_nuevo_precioCompra.Name = "textBox_nuevo_precioCompra";
+            this.textBox_nuevo_precioCompra.Size = new System.Drawing.Size(221, 26);
+            this.textBox_nuevo_precioCompra.TabIndex = 29;
+            this.textBox_nuevo_precioCompra.TextChanged += new System.EventHandler(this.textBox_nuevo_precioCompra_TextChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(457, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(117, 20);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Precio Compra:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(230, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(104, 20);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "Precio Venta:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(3, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(54, 20);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "Stock:";
+            // 
+            // button_nuevo_crear
+            // 
+            this.button_nuevo_crear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_nuevo_crear.Enabled = false;
+            this.button_nuevo_crear.Location = new System.Drawing.Point(980, 532);
+            this.button_nuevo_crear.Name = "button_nuevo_crear";
+            this.button_nuevo_crear.Size = new System.Drawing.Size(118, 30);
+            this.button_nuevo_crear.TabIndex = 2;
+            this.button_nuevo_crear.Text = "Crear";
+            this.button_nuevo_crear.UseVisualStyleBackColor = true;
+            this.button_nuevo_crear.Click += new System.EventHandler(this.button_nuevo_crear_Click);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 5;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanel2.Controls.Add(this.textBox_nuevo_marca, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBox_nuevo_grado, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBox_nuevo_contenido, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBox_nuevo_unidad, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label7, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label8, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(69, 67);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1032, 71);
+            this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // textBox_nuevo_marca
+            // 
+            this.textBox_nuevo_marca.Location = new System.Drawing.Point(3, 38);
+            this.textBox_nuevo_marca.Name = "textBox_nuevo_marca";
+            this.textBox_nuevo_marca.Size = new System.Drawing.Size(221, 26);
+            this.textBox_nuevo_marca.TabIndex = 31;
+            this.textBox_nuevo_marca.TextChanged += new System.EventHandler(this.textBox_nuevo_marca_TextChanged);
+            // 
+            // textBox_nuevo_grado
+            // 
+            this.textBox_nuevo_grado.Location = new System.Drawing.Point(230, 38);
+            this.textBox_nuevo_grado.Name = "textBox_nuevo_grado";
+            this.textBox_nuevo_grado.Size = new System.Drawing.Size(221, 26);
+            this.textBox_nuevo_grado.TabIndex = 30;
+            this.textBox_nuevo_grado.TextChanged += new System.EventHandler(this.textBox_nuevo_grado_TextChanged);
+            // 
+            // textBox_nuevo_contenido
+            // 
+            this.textBox_nuevo_contenido.Location = new System.Drawing.Point(457, 38);
+            this.textBox_nuevo_contenido.Name = "textBox_nuevo_contenido";
+            this.textBox_nuevo_contenido.Size = new System.Drawing.Size(221, 26);
+            this.textBox_nuevo_contenido.TabIndex = 29;
+            this.textBox_nuevo_contenido.TextChanged += new System.EventHandler(this.textBox_nuevo_contenido_TextChanged);
+            // 
+            // textBox_nuevo_unidad
+            // 
+            this.textBox_nuevo_unidad.Location = new System.Drawing.Point(684, 38);
+            this.textBox_nuevo_unidad.Name = "textBox_nuevo_unidad";
+            this.textBox_nuevo_unidad.Size = new System.Drawing.Size(221, 26);
+            this.textBox_nuevo_unidad.TabIndex = 28;
+            this.textBox_nuevo_unidad.TextChanged += new System.EventHandler(this.textBox_nuevo_unidad_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(684, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 20);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Unidad:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(457, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(86, 20);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Contenido:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(230, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 20);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Grado:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(57, 20);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "Marca:";
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.button_anadir_equivalentes__crear);
+            this.tabPage8.Controls.Add(this.label_anadir_equivalentes_desc);
+            this.tabPage8.Controls.Add(this.label37);
+            this.tabPage8.Controls.Add(this.button_anadir_equivalentes_selec);
+            this.tabPage8.Controls.Add(this.textBox_anadir_equivalentes_codigo);
+            this.tabPage8.Controls.Add(this.label35);
+            this.tabPage8.Controls.Add(this.groupBox3);
+            this.tabPage8.Location = new System.Drawing.Point(4, 29);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(1198, 674);
+            this.tabPage8.TabIndex = 2;
+            this.tabPage8.Text = "Añadir Equivalentes";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // button_anadir_equivalentes__crear
+            // 
+            this.button_anadir_equivalentes__crear.Enabled = false;
+            this.button_anadir_equivalentes__crear.Location = new System.Drawing.Point(951, 443);
+            this.button_anadir_equivalentes__crear.Name = "button_anadir_equivalentes__crear";
+            this.button_anadir_equivalentes__crear.Size = new System.Drawing.Size(169, 30);
+            this.button_anadir_equivalentes__crear.TabIndex = 35;
+            this.button_anadir_equivalentes__crear.Text = "Añadir equivalentes";
+            this.button_anadir_equivalentes__crear.UseVisualStyleBackColor = true;
+            this.button_anadir_equivalentes__crear.Click += new System.EventHandler(this.button_anadir_equivalentes__crear_Click);
+            // 
+            // label_anadir_equivalentes_desc
+            // 
+            this.label_anadir_equivalentes_desc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_anadir_equivalentes_desc.AutoSize = true;
+            this.label_anadir_equivalentes_desc.Location = new System.Drawing.Point(186, 99);
+            this.label_anadir_equivalentes_desc.Name = "label_anadir_equivalentes_desc";
+            this.label_anadir_equivalentes_desc.Size = new System.Drawing.Size(36, 20);
+            this.label_anadir_equivalentes_desc.TabIndex = 29;
+            this.label_anadir_equivalentes_desc.Text = "___";
+            // 
+            // label37
+            // 
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(54, 99);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(96, 20);
+            this.label37.TabIndex = 28;
+            this.label37.Text = "Descripcion:";
+            // 
+            // button_anadir_equivalentes_selec
+            // 
+            this.button_anadir_equivalentes_selec.Enabled = false;
+            this.button_anadir_equivalentes_selec.Location = new System.Drawing.Point(394, 35);
+            this.button_anadir_equivalentes_selec.Name = "button_anadir_equivalentes_selec";
+            this.button_anadir_equivalentes_selec.Size = new System.Drawing.Size(113, 30);
+            this.button_anadir_equivalentes_selec.TabIndex = 27;
+            this.button_anadir_equivalentes_selec.Text = "Seleccionar";
+            this.button_anadir_equivalentes_selec.UseVisualStyleBackColor = true;
+            this.button_anadir_equivalentes_selec.Click += new System.EventHandler(this.button_anadir_equivalentes_selec_Click);
+            // 
+            // textBox_anadir_equivalentes_codigo
+            // 
+            this.textBox_anadir_equivalentes_codigo.Location = new System.Drawing.Point(194, 37);
+            this.textBox_anadir_equivalentes_codigo.Name = "textBox_anadir_equivalentes_codigo";
+            this.textBox_anadir_equivalentes_codigo.Size = new System.Drawing.Size(154, 26);
+            this.textBox_anadir_equivalentes_codigo.TabIndex = 26;
+            this.textBox_anadir_equivalentes_codigo.TextChanged += new System.EventHandler(this.textBox_anadir_equivalentes_codigo_TextChanged);
+            // 
+            // label35
+            // 
+            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(58, 43);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(63, 20);
+            this.label35.TabIndex = 25;
+            this.label35.Text = "Código:";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.label32);
+            this.groupBox3.Controls.Add(this.button_anadir_equivalentes_quitar);
+            this.groupBox3.Controls.Add(this.button_anadir_equivalentes_anadir);
+            this.groupBox3.Controls.Add(this.textBox_anadir_equivalentes_grado);
+            this.groupBox3.Controls.Add(this.label33);
+            this.groupBox3.Controls.Add(this.label34);
+            this.groupBox3.Controls.Add(this.listBox_anadir_equivalentes);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(58, 161);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1084, 254);
+            this.groupBox3.TabIndex = 24;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Seleccionar equivalentes para el nuevo producto:";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(370, 22);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(180, 20);
+            this.label32.TabIndex = 36;
+            this.label32.Text = "Productos Equivalentes:";
+            // 
+            // button_anadir_equivalentes_quitar
+            // 
+            this.button_anadir_equivalentes_quitar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_anadir_equivalentes_quitar.Enabled = false;
+            this.button_anadir_equivalentes_quitar.Location = new System.Drawing.Point(893, 199);
+            this.button_anadir_equivalentes_quitar.Name = "button_anadir_equivalentes_quitar";
+            this.button_anadir_equivalentes_quitar.Size = new System.Drawing.Size(169, 30);
+            this.button_anadir_equivalentes_quitar.TabIndex = 35;
+            this.button_anadir_equivalentes_quitar.Text = "Quitar de la lista";
+            this.button_anadir_equivalentes_quitar.UseVisualStyleBackColor = true;
+            this.button_anadir_equivalentes_quitar.Click += new System.EventHandler(this.button_anadir_equivalentes_quitar_Click);
+            // 
+            // button_anadir_equivalentes_anadir
+            // 
+            this.button_anadir_equivalentes_anadir.Enabled = false;
+            this.button_anadir_equivalentes_anadir.Location = new System.Drawing.Point(96, 117);
+            this.button_anadir_equivalentes_anadir.Name = "button_anadir_equivalentes_anadir";
+            this.button_anadir_equivalentes_anadir.Size = new System.Drawing.Size(169, 30);
+            this.button_anadir_equivalentes_anadir.TabIndex = 34;
+            this.button_anadir_equivalentes_anadir.Text = "Añadir a la lista";
+            this.button_anadir_equivalentes_anadir.UseVisualStyleBackColor = true;
+            this.button_anadir_equivalentes_anadir.Click += new System.EventHandler(this.button_anadir_equivalentes_anadir_Click);
+            // 
+            // textBox_anadir_equivalentes_grado
+            // 
+            this.textBox_anadir_equivalentes_grado.Location = new System.Drawing.Point(96, 85);
+            this.textBox_anadir_equivalentes_grado.Name = "textBox_anadir_equivalentes_grado";
+            this.textBox_anadir_equivalentes_grado.Size = new System.Drawing.Size(168, 26);
+            this.textBox_anadir_equivalentes_grado.TabIndex = 33;
+            this.textBox_anadir_equivalentes_grado.TextChanged += new System.EventHandler(this.textBox_anadir_equivalentes_grado_TextChanged);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(18, 46);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(317, 20);
+            this.label33.TabIndex = 32;
+            this.label33.Text = "Código del Grado del Producto Equivalente:";
+            // 
+            // label34
+            // 
+            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(370, 62);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(368, 20);
+            this.label34.TabIndex = 4;
+            this.label34.Text = "Código / Marca / Grado / Contenido / Unidad ";
+            // 
+            // listBox_anadir_equivalentes
+            // 
+            this.listBox_anadir_equivalentes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox_anadir_equivalentes.FormattingEnabled = true;
+            this.listBox_anadir_equivalentes.ItemHeight = 20;
+            this.listBox_anadir_equivalentes.Location = new System.Drawing.Point(374, 85);
+            this.listBox_anadir_equivalentes.Name = "listBox_anadir_equivalentes";
+            this.listBox_anadir_equivalentes.Size = new System.Drawing.Size(497, 144);
+            this.listBox_anadir_equivalentes.TabIndex = 0;
+            this.listBox_anadir_equivalentes.SelectedIndexChanged += new System.EventHandler(this.listBox_anadir_equivalentes_SelectedIndexChanged);
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.tabControl4);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1218, 619);
+            this.tabPage3.Size = new System.Drawing.Size(1218, 555);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Entrada";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1141,7 +1374,7 @@
             this.tabControl4.Location = new System.Drawing.Point(18, 6);
             this.tabControl4.Name = "tabControl4";
             this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(1194, 752);
+            this.tabControl4.Size = new System.Drawing.Size(1194, 688);
             this.tabControl4.TabIndex = 0;
             // 
             // tabPage5
@@ -1155,7 +1388,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1186, 719);
+            this.tabPage5.Size = new System.Drawing.Size(1186, 655);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "Diaria";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1222,7 +1455,7 @@
             this.dataGridView_entrada_diaria.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView_entrada_diaria.Location = new System.Drawing.Point(6, 6);
             this.dataGridView_entrada_diaria.Name = "dataGridView_entrada_diaria";
-            this.dataGridView_entrada_diaria.Size = new System.Drawing.Size(862, 694);
+            this.dataGridView_entrada_diaria.Size = new System.Drawing.Size(862, 508);
             this.dataGridView_entrada_diaria.TabIndex = 4;
             // 
             // tabPage6
@@ -1236,7 +1469,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 29);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1186, 719);
+            this.tabPage6.Size = new System.Drawing.Size(1186, 655);
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "Mensual";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1300,9 +1533,10 @@
             this.dataGridView_entrada_mensual.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_entrada_mensual.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView_entrada_mensual.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_entrada_mensual.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView_entrada_mensual.Location = new System.Drawing.Point(6, 6);
             this.dataGridView_entrada_mensual.Name = "dataGridView_entrada_mensual";
-            this.dataGridView_entrada_mensual.Size = new System.Drawing.Size(862, 722);
+            this.dataGridView_entrada_mensual.Size = new System.Drawing.Size(862, 508);
             this.dataGridView_entrada_mensual.TabIndex = 14;
             // 
             // tabPage4
@@ -1313,7 +1547,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1218, 619);
+            this.tabPage4.Size = new System.Drawing.Size(1218, 555);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Historial";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1322,7 +1556,7 @@
             // 
             this.button_historial_eliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_historial_eliminar.Enabled = false;
-            this.button_historial_eliminar.Location = new System.Drawing.Point(1083, 742);
+            this.button_historial_eliminar.Location = new System.Drawing.Point(1085, 519);
             this.button_historial_eliminar.Name = "button_historial_eliminar";
             this.button_historial_eliminar.Size = new System.Drawing.Size(118, 30);
             this.button_historial_eliminar.TabIndex = 7;
@@ -1392,84 +1626,29 @@
             this.dataGridView_historial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_historial.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView_historial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_historial.GridColor = System.Drawing.SystemColors.ButtonShadow;
-            this.dataGridView_historial.Location = new System.Drawing.Point(15, 6);
+            this.dataGridView_historial.GridColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridView_historial.Location = new System.Drawing.Point(17, 3);
             this.dataGridView_historial.Name = "dataGridView_historial";
-            this.dataGridView_historial.Size = new System.Drawing.Size(1186, 730);
+            this.dataGridView_historial.Size = new System.Drawing.Size(1186, 513);
             this.dataGridView_historial.TabIndex = 4;
             this.dataGridView_historial.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_historial_CellClick);
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.panel1);
-            this.tabPage7.Location = new System.Drawing.Point(4, 24);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1218, 619);
-            this.tabPage7.TabIndex = 4;
-            this.tabPage7.Text = "Inicio";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(25, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(930, 524);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Sitka Subheading", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(245, 530);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(497, 30);
-            this.label29.TabIndex = 4;
-            this.label29.Text = "Programa para la administracíón de filtros y aceites";
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoScroll = true;
-            this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.label29);
-            this.panel1.Location = new System.Drawing.Point(157, 40);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(972, 573);
-            this.panel1.TabIndex = 6;
             // 
             // Acix
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1240, 679);
+            this.ClientSize = new System.Drawing.Size(1240, 641);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Acix";
             this.Text = "Acix";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tabControl1.ResumeLayout(false);
-            this.Page_productos.ResumeLayout(false);
-            this.tabControl3.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.groupBox_listado_advertencia.ResumeLayout(false);
-            this.groupBox_listado_advertencia.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_listado)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.groupBox_nuevo_equivalentes.ResumeLayout(false);
-            this.groupBox_nuevo_equivalentes.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.Page_pedidos.ResumeLayout(false);
             this.Page_pedidos.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1485,6 +1664,25 @@
             this.groupBox_Equivalencias.PerformLayout();
             this.groupBox_Resultado.ResumeLayout(false);
             this.groupBox_Resultado.PerformLayout();
+            this.Page_productos.ResumeLayout(false);
+            this.tabControl3.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.groupBox_listado_advertencia.ResumeLayout(false);
+            this.groupBox_listado_advertencia.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_listado)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.groupBox_nuevo_equivalentes.ResumeLayout(false);
+            this.groupBox_nuevo_equivalentes.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabControl4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
@@ -1498,11 +1696,6 @@
             this.groupBox_historial_advertencia.ResumeLayout(false);
             this.groupBox_historial_advertencia.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_historial)).EndInit();
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1616,6 +1809,21 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.Button button_anadir_equivalentes__crear;
+        private System.Windows.Forms.Label label_anadir_equivalentes_desc;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Button button_anadir_equivalentes_selec;
+        private System.Windows.Forms.TextBox textBox_anadir_equivalentes_codigo;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Button button_anadir_equivalentes_quitar;
+        private System.Windows.Forms.Button button_anadir_equivalentes_anadir;
+        private System.Windows.Forms.TextBox textBox_anadir_equivalentes_grado;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.ListBox listBox_anadir_equivalentes;
     }
 }
 

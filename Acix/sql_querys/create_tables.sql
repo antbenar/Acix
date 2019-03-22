@@ -1,16 +1,10 @@
 /*CREATE DATABASE Acix_db;*/
 USE Acix_db;
-/*CREATE TABLE marca
-(
-	codigo INT not null IDENTITY(1,1),
-	nombre varchar(30),
-	CONSTRAINT marca_pk PRIMARY KEY (codigo),
-);*/ 
-/*
+
 CREATE TABLE producto
 (
 	codigo INT not null IDENTITY(1,1),
-	marca_cod INT,
+	marca varchar(30),
 	grado varchar(30),
 	contenido varchar(30),
 	unidad varchar(30),
@@ -18,7 +12,6 @@ CREATE TABLE producto
 	precio_venta decimal(8,2),
 	precio_compra decimal(8,2),
 	CONSTRAINT producto_pk PRIMARY KEY (codigo),
-	CONSTRAINT producto_fk_marca FOREIGN KEY (marca_cod) REFERENCES marca(codigo)
 ); 
 
 CREATE TABLE Equivalencias
@@ -29,7 +22,7 @@ CREATE TABLE Equivalencias
 	CONSTRAINT Equivalencias_fk_producto1 FOREIGN KEY (codigo1) REFERENCES producto(codigo),
 	CONSTRAINT Equivalencias_fk_producto2 FOREIGN KEY (codigo2) REFERENCES producto(codigo)
 );
-*/
+
 CREATE TABLE historial
 (
 	codigo INT not null IDENTITY(1,1),

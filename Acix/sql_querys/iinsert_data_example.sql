@@ -27,7 +27,7 @@ INSERT INTO dbo.Equivalencias (codigo1,codigo2) VALUES
 */
 
 
-
+/*
 INSERT INTO dbo.historial (descripcion_producto, dia_hora, cantidad, ganancia, vigente) VALUES 
 ('holiiiiiii','02/18/2019 22:14:58',2,4,1),
 ('holiiiiiii2','02/01/2019 22:14:58',2,4,1),
@@ -36,3 +36,5 @@ INSERT INTO dbo.historial (descripcion_producto, dia_hora, cantidad, ganancia, v
 ('holiiiiiii5','03/31/2019 22:14:58',2,4,1),
 ('holiiiiiii6','03/01/2018 22:14:58',2,4,1),
 ('holiiiiiii7','03/31/2018 22:14:58',2,4,1);
+
+*/

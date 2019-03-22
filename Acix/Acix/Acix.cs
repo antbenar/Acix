@@ -21,7 +21,6 @@ namespace Acix
         {
             InitializeComponent();
             Initialize_data_grids();
-            Initialize_combobox_marca();
             groupBox_Resultado.BringToFront();
             groupBox_Equivalencias.BringToFront();
             groupBox_listado_advertencia.BringToFront();
@@ -33,9 +32,12 @@ namespace Acix
 
         private void Initialize_data_grids()
         {
+            Initialize_combobox_contenido();
             //**************************************listado de prodcutos**************************************
-            DataTable dt = c.Select("SELECT dbo.producto.codigo AS Codigo, dbo.marca.nombre AS Marca, grado AS Grado, contenido AS Contenido, unidad AS Unidad, stock as Stock, precio_venta AS 'Precio de venta', precio_compra AS 'Precio de compra' FROM dbo.producto JOIN dbo.marca ON dbo.producto.marca_cod = dbo.marca.codigo ;");
+            DataTable dt = c.Select(@"SELECT dbo.producto.codigo AS Codigo, dbo.producto.marca AS Marca, grado AS Grado, contenido AS Contenido, unidad AS Unidad, stock as Stock, precio_venta AS 'Precio de venta', precio_compra AS 'Precio de compra' 
+                                    FROM dbo.producto;");
             dataGridView_listado.DataSource = dt;
+            dataGridView_listado.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             //******************************************historial************************************
             DataTable dt_historial = c.Select(@"SELECT codigo AS 'Codigo', dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Ganancia', CASE WHEN vigente = 1 THEN 'SI' ELSE 'NO' END AS Vigente
@@ -43,6 +45,7 @@ namespace Acix
                                         Order by dia_hora DESC;");
             dataGridView_historial.DataSource = dt_historial;
             dataGridView_historial.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView_historial.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             //****************************calcular datos de entrada diaria********************************
             //calcular cantidades vendidas y ganancia
@@ -63,7 +66,7 @@ namespace Acix
                                             Order by dia_hora DESC;");
             dataGridView_entrada_diaria.DataSource = dt_diaria;
             dataGridView_entrada_diaria.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
+            dataGridView_entrada_diaria.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             //******************************calcular datos de entrada mensual*******************************
             //calcular cantidades vendidas y ganancia
@@ -87,6 +90,7 @@ namespace Acix
                                             Order by dia_hora DESC;");
             dataGridView_entrada_mensual.DataSource = dt_mensual;
             dataGridView_entrada_mensual.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;///
+            dataGridView_entrada_mensual.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
 
         private void dataGridView_listado_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -178,30 +182,33 @@ namespace Acix
             if(textBox_nuevo_codigo.Text != "")
             {
                 button_nuevo_anadir.Enabled = true;
-                button_nuevo_quitar.Enabled = true;
             }
             else
             {
                 button_nuevo_anadir.Enabled = false;
-                button_nuevo_quitar.Enabled = false;
             }
         }
 
         private void button_nuevo_anadir_Click(object sender, EventArgs e)
         {
             string cod = textBox_nuevo_codigo.Text;
-            cur_product = c.Select("SELECT dbo.producto.codigo AS codigo, CONCAT(dbo.producto.codigo, ' / ' , dbo.marca.nombre,' / ' , grado, ' / ', contenido , ' / ', unidad) AS description FROM dbo.producto JOIN dbo.marca ON dbo.producto.marca_cod = dbo.marca.codigo WHERE dbo.producto.codigo = " + cod + ";");
+            cur_product = c.Select(@"SELECT dbo.producto.codigo AS codigo, CONCAT(dbo.producto.codigo, ' / ' , dbo.producto.marca ,' / ' , grado, ' / ', contenido , ' / ', unidad) AS description 
+                                    FROM dbo.producto WHERE dbo.producto.grado = '" + cod + "';");
             
-            string descripcion = cur_product.Rows[0]["description"].ToString();
-
-            //antes de agregar comprobar que no se agregue un elemento repetido.
-            bool repetido = false;
-
-            foreach (String item in listBox_nuevo_equivalentes.Items)
+            foreach(DataRow row in cur_product.Rows)
             {
-                if (item == descripcion) repetido = true;
+                string descripcion = row["description"].ToString();
+
+                //antes de agregar comprobar que no se agregue un elemento repetido.
+                bool repetido = false;
+
+                foreach (String item in listBox_nuevo_equivalentes.Items)
+                {
+                    if (item == descripcion) repetido = true;
+                }
+                if (!repetido) listBox_nuevo_equivalentes.Items.Add(descripcion);
             }
-            if (!repetido) listBox_nuevo_equivalentes.Items.Add(descripcion);
+            
             //fin antes de agregar comprobar que no se agregue un elemento repetido.
 
             textBox_nuevo_codigo.Text = "";
@@ -210,6 +217,7 @@ namespace Acix
         private void button_nuevo_quitar_Click(object sender, EventArgs e)
         {
             listBox_nuevo_equivalentes.Items.Remove( listBox_nuevo_equivalentes.SelectedItem );
+            button_nuevo_quitar.Enabled = false;
         }
         //FIN NUEVOS EQUIVALENTES
 
@@ -240,20 +248,7 @@ namespace Acix
             
         private void button_nuevo_crear_Click(object sender, EventArgs e)
         {
-            //INICIO preguntar si existe la marca para buscar el codigo, en el caso que no exista crear una nueva.
             string marca = textBox_nuevo_marca.Text.ToUpper();
-            cur_product = c.Select("SELECT DISTINCT codigo FROM dbo.marca WHERE dbo.marca.nombre = '" + marca + "';");
-
-            if ( cur_product.Rows.Count == 0)
-            {
-                c.Insert("INSERT INTO dbo.marca (nombre) VALUES ('"+marca+"');" );
-                cur_product = c.Select("SELECT DISTINCT codigo FROM dbo.marca WHERE dbo.marca.nombre = '" + marca + "';");
-            }
-            string marca_cod = cur_product.Rows[0]["codigo"].ToString();
-
-            //FIN preguntar si existe la marca para buscar el codigo, en el caso que no exista crear una nueva.
-
-
             string grado = textBox_nuevo_grado.Text.ToUpper();
             string contenido = textBox_nuevo_contenido.Text.ToUpper();
             string unidad = textBox_nuevo_unidad.Text.ToUpper();
@@ -263,12 +258,12 @@ namespace Acix
 
             
 
-            if (!c.Insert("INSERT INTO producto (marca_cod, grado, contenido, unidad, stock, precio_venta, precio_compra) VALUES ("+ marca_cod + ",'" + grado + "','" + contenido + "','" + unidad + "'," + stock + "," + precio_venta + "," + precio_compra + ");"))
+            if (!c.Insert("INSERT INTO producto (marca, grado, contenido, unidad, stock, precio_venta, precio_compra) VALUES ('" + marca + "','" + grado + "','" + contenido + "','" + unidad + "'," + stock + "," + precio_venta + "," + precio_compra + ");"))
             {
                 clear_create_boxes();
                 MessageBox.Show("Error al insertar producto");
             }
-           
+            else MessageBox.Show("Producto añadido exitosamente!");
 
             //inicio añadir equivalentes 
             string curID = c.curID();
@@ -287,10 +282,9 @@ namespace Acix
             }
             //fin añadir equivalentes 
 
-            MessageBox.Show("Producto añadido exitosamente!");
-
             clear_create_boxes();
             Initialize_data_grids();
+            listBox_nuevo_equivalentes.Items.Clear();
         }
 
         /****************************************************************************************************************
@@ -303,28 +297,44 @@ namespace Acix
 
 
         //inicio actualizacion de combo boxes
-        public void Initialize_combobox_marca()
+        public void Initialize_combobox_contenido()
         {
-            comboBox_marca.Items.Clear();
-            comboBox_grado.Items.Clear();
-            comboBox_contenido.Items.Clear();
-            comboBox_unidad.Items.Clear();
+            comboBox_contenido.Items.Clear(); comboBox_contenido.Text = "";
+            comboBox_marca.Items.Clear(); comboBox_marca.Text = "";
+            comboBox_grado.Items.Clear(); comboBox_grado.Text = "";
+            comboBox_unidad.Items.Clear(); comboBox_unidad.Text = "";
 
-            DataTable dt = c.Select("SELECT DISTINCT dbo.marca.nombre FROM dbo.marca;");
+            DataTable dt = c.Select("SELECT DISTINCT dbo.producto.contenido FROM dbo.producto;");
+
+            foreach (DataRow row in dt.Rows)
+            {
+                comboBox_contenido.Items.Add((string)row[0]);
+            }
+        }
+
+        private void comboBox_contenido_SelectedValueChanged(object sender, EventArgs e)
+        {
+            comboBox_marca.Items.Clear(); comboBox_marca.Text = "";
+            comboBox_grado.Items.Clear(); comboBox_grado.Text = "";
+            comboBox_unidad.Items.Clear(); comboBox_unidad.Text = "";
+
+            string contenido = comboBox_contenido.Text;
+            DataTable dt = c.Select("SELECT DISTINCT dbo.producto.marca FROM dbo.producto WHERE dbo.producto.contenido LIKE '%" + contenido + "%';");
             foreach (DataRow row in dt.Rows)
             {
                 comboBox_marca.Items.Add((string)row[0]);
             }
         }
-        
+
+
         private void comboBox_marca_SelectedValueChanged(object sender, EventArgs e)
         {
-            comboBox_grado.Items.Clear();
-            comboBox_contenido.Items.Clear();
-            comboBox_unidad.Items.Clear();
+            comboBox_grado.Items.Clear(); comboBox_grado.Text = "";
+            comboBox_unidad.Items.Clear(); comboBox_unidad.Text = "";
 
-            string marca = comboBox_marca.Text;
-            DataTable dt = c.Select("SELECT DISTINCT dbo.producto.grado FROM dbo.producto JOIN dbo.marca ON dbo.producto.marca_cod = dbo.marca.codigo WHERE dbo.marca.nombre LIKE '%" + marca + "%';");
+            DataTable dt = c.Select(@"SELECT DISTINCT dbo.producto.grado 
+                                    FROM dbo.producto
+                                    WHERE dbo.producto.marca LIKE '%" + comboBox_marca.Text + "%' AND dbo.producto.contenido LIKE '%" + comboBox_contenido.Text + "%';");
             foreach (DataRow row in dt.Rows)
             {
                 comboBox_grado.Items.Add((string)row[0]);
@@ -334,33 +344,27 @@ namespace Acix
 
         private void comboBox_grado_SelectedValueChanged(object sender, EventArgs e)
         {
-            comboBox_contenido.Items.Clear();
-            comboBox_unidad.Items.Clear();
+            comboBox_unidad.Items.Clear(); comboBox_unidad.Text = "";
 
-            DataTable dt = c.Select("SELECT DISTINCT dbo.producto.contenido FROM dbo.producto JOIN dbo.marca ON dbo.producto.marca_cod = dbo.marca.codigo WHERE dbo.marca.nombre LIKE '%" + comboBox_marca.Text + "%' AND dbo.producto.grado LIKE '%" + comboBox_grado.Text + "%';");
-            foreach (DataRow row in dt.Rows)
-            {
-                comboBox_contenido.Items.Add((string)row[0]);
-            }
-            
-        }
-
-        private void comboBox_contenido_SelectedValueChanged(object sender, EventArgs e)
-        {
-            comboBox_unidad.Items.Clear();
-
-            DataTable dt = c.Select("SELECT DISTINCT dbo.producto.unidad FROM dbo.producto JOIN dbo.marca ON dbo.producto.marca_cod = dbo.marca.codigo WHERE dbo.marca.nombre LIKE '%" + comboBox_marca.Text + "%' AND dbo.producto.grado LIKE '%" + comboBox_grado.Text + "%' AND dbo.producto.contenido LIKE '%" + comboBox_contenido.Text + "%';");
+            DataTable dt = c.Select(@"SELECT DISTINCT dbo.producto.unidad 
+                                    FROM dbo.producto 
+                                    WHERE dbo.producto.marca LIKE '%" + comboBox_marca.Text + "%' AND dbo.producto.grado LIKE '%" + comboBox_grado.Text + "%' AND dbo.producto.contenido LIKE '%" + comboBox_contenido.Text + "%';");
             foreach (DataRow row in dt.Rows)
             {
                 comboBox_unidad.Items.Add((string)row[0]);
             }
+
         }
+
+
 
         //fin actualizacion de combo boxes
        
         private void Btn_descripcion_Click(object sender, EventArgs e)
         {
-            DataTable dt = c.Select("SELECT dbo.producto.codigo, CONCAT(dbo.producto.codigo, ' / ' , dbo.marca.nombre,' / ' , grado, ' / ', contenido , ' / ', unidad) AS description FROM dbo.producto JOIN dbo.marca ON dbo.producto.marca_cod = dbo.marca.codigo WHERE dbo.marca.nombre LIKE '%" + comboBox_marca.Text+"%' AND dbo.producto.grado LIKE '%"+comboBox_grado.Text + "%' AND dbo.producto.contenido LIKE '%"+ comboBox_contenido.Text + "%' AND dbo.producto.unidad LIKE '%" + comboBox_unidad.Text + "%';");
+            DataTable dt = c.Select(@"SELECT dbo.producto.codigo, CONCAT(dbo.producto.codigo, ' / ' , dbo.producto.marca,' / ' , grado, ' / ', contenido , ' / ', unidad) AS description 
+                                    FROM dbo.producto
+                                    WHERE dbo.producto.marca LIKE '%" + comboBox_marca.Text+"%' AND dbo.producto.grado LIKE '%"+comboBox_grado.Text + "%' AND dbo.producto.contenido LIKE '%"+ comboBox_contenido.Text + "%' AND dbo.producto.unidad LIKE '%" + comboBox_unidad.Text + "%';");
             listBox_Buscar.DataSource = dt;
             listBox_Buscar.ValueMember = "codigo";
             listBox_Buscar.DisplayMember = "description";
@@ -374,7 +378,9 @@ namespace Acix
         //start  list search
         private void button1_Click(object sender, EventArgs e)
         {
-            DataTable dt = c.Select("SELECT dbo.producto.codigo AS Codigo, CONCAT(dbo.producto.codigo, ' / ' , dbo.marca.nombre,' / ' , grado, ' / ', contenido , ' / ', unidad) AS description FROM dbo.producto JOIN dbo.marca ON dbo.producto.marca_cod = dbo.marca.codigo WHERE dbo.producto.codigo="+ textBox_codigo.Text +";");
+            DataTable dt = c.Select(@"SELECT dbo.producto.codigo AS Codigo, CONCAT(dbo.producto.codigo, ' / ' , dbo.producto.marca,' / ' , grado, ' / ', contenido , ' / ', unidad) AS description 
+                                    FROM dbo.producto
+                                    WHERE dbo.producto.codigo=" + textBox_codigo.Text +";");
             listBox_Buscar.DataSource = dt;
             listBox_Buscar.ValueMember = "codigo";
             listBox_Buscar.DisplayMember = "description";
@@ -397,7 +403,9 @@ namespace Acix
             string cod = row["Codigo"].ToString();
             //end
 
-            cur_product = c.Select("SELECT dbo.producto.codigo AS Codigo, dbo.producto.stock AS Stock, dbo.producto.precio_venta AS Precio_venta, dbo.producto.precio_compra AS Precio_compra, CONCAT(dbo.producto.codigo, ' / ', dbo.marca.nombre, ' / ', grado, ' / ', contenido, ' / ', unidad) AS description FROM dbo.producto JOIN dbo.marca ON dbo.producto.marca_cod = dbo.marca.codigo WHERE dbo.producto.codigo = " + cod + "; ");
+            cur_product = c.Select(@"SELECT dbo.producto.codigo AS Codigo, dbo.producto.stock AS Stock, dbo.producto.precio_venta AS Precio_venta, dbo.producto.precio_compra AS Precio_compra, CONCAT(dbo.producto.codigo, ' / ', dbo.producto.marca, ' / ', grado, ' / ', contenido, ' / ', unidad) AS description 
+                                    FROM dbo.producto
+                                    WHERE dbo.producto.codigo = " + cod + "; ");
             label_res_descripcion.Text = cur_product.Rows[0]["description"].ToString();
             label_res_stock.Text = cur_product.Rows[0]["Stock"].ToString();
             label_res_pv.Text = cur_product.Rows[0]["Precio_venta"].ToString();
@@ -415,9 +423,8 @@ namespace Acix
             string codigo = cur_product.Rows[0]["codigo"].ToString();
 
             //fill listbox_equivalencias 
-            DataTable dt = c.Select(@"SELECT dbo.producto.codigo AS Codigo, CONCAT(dbo.producto.codigo, ' / ' , dbo.marca.nombre,' / ' , grado, ' / ', contenido , ' / ', unidad, ' / ', stock) AS description 
+            DataTable dt = c.Select(@"SELECT dbo.producto.codigo AS Codigo, CONCAT(dbo.producto.codigo, ' / ' , dbo.producto.marca,' / ' , grado, ' / ', contenido , ' / ', unidad, ' / ', stock) AS description 
                                     FROM dbo.producto
-                                    JOIN dbo.marca ON dbo.producto.marca_cod = dbo.marca.codigo
                                     WHERE dbo.producto.codigo IN(
                                         SELECT dbo.Equivalencias.codigo1 + dbo.Equivalencias.codigo2 - dbo.producto.codigo as equivalentes
                                         FROM dbo.producto
@@ -445,7 +452,9 @@ namespace Acix
                 string cod = row["Codigo"].ToString();
                 //end
 
-                cur_product = c.Select("SELECT dbo.producto.codigo AS Codigo, dbo.producto.stock AS Stock, dbo.producto.precio_venta AS Precio_venta, dbo.producto.precio_compra AS Precio_compra, CONCAT(dbo.producto.codigo, ' / ', dbo.marca.nombre, ' / ', grado, ' / ', contenido, ' / ', unidad) AS description FROM dbo.producto JOIN dbo.marca ON dbo.producto.marca_cod = dbo.marca.codigo WHERE dbo.producto.codigo = " + cod + "; ");
+                cur_product = c.Select(@"SELECT dbo.producto.codigo AS Codigo, dbo.producto.stock AS Stock, dbo.producto.precio_venta AS Precio_venta, dbo.producto.precio_compra AS Precio_compra, CONCAT(dbo.producto.codigo, ' / ', dbo.producto.marca, ' / ', grado, ' / ', contenido, ' / ', unidad) AS description 
+                                        FROM dbo.producto
+                                        WHERE dbo.producto.codigo = " + cod + "; ");
                 label_res_descripcion.Text = cur_product.Rows[0]["description"].ToString();
                 label_res_stock.Text = cur_product.Rows[0]["Stock"].ToString();
                 label_res_pv.Text = cur_product.Rows[0]["Precio_venta"].ToString();
@@ -555,6 +564,12 @@ namespace Acix
             button_vender.Enabled = false;
         }
 
+        private void listBox_nuevo_equivalentes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button_nuevo_quitar.Enabled = true;
+        }
+
+
         /****************************************************************************************************************
          *                                             2.0 FIN PEDIDOS
          ****************************************************************************************************************/
@@ -562,7 +577,69 @@ namespace Acix
         /****************************************************************************************************************
         *                                             3.0 INICIO ENTRADAS
         ****************************************************************************************************************/
-        
+        private void monthCalendar_entrada_diaria_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            DateTime d = monthCalendar_entrada_diaria.SelectionRange.Start;
+            string day = d.Day.ToString();
+            string month = d.Month.ToString();
+            string year = d.Year.ToString();
+
+            DataTable dt_diaria = c.Select(@"SELECT codigo AS 'Codigo en Historial', dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Ganancia'
+                                            FROM dbo.historial
+                                            WHERE vigente = 1 AND DAY(dia_hora)= '" + day + @"'
+                                            AND
+                                            MONTH(dia_hora) = '" + month + @"'
+                                            AND
+                                            YEAR(dia_hora) = '" + year + @"'
+                                            Order by dia_hora DESC;");
+            dataGridView_entrada_diaria.DataSource = dt_diaria;
+            dataGridView_entrada_diaria.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;///
+
+            //cambiar los labels de cantidad y ganancia
+            DataTable calculo_diario = c.Select(@"SELECT Sum(ganancia) AS ganancia, SUM (cantidad) AS cantidad
+                                                FROM dbo.historial
+                                                WHERE vigente = 1 AND DAY(dia_hora)= '" + day + @"'
+                                                AND
+                                                MONTH(dia_hora) = '" + month + @"'
+                                                AND
+                                                YEAR(dia_hora) = '" + year + @"';");
+
+            if (calculo_diario.Rows.Count > 0)
+            {
+                label_entrada_diaria_cantidad.Text = calculo_diario.Rows[0]["cantidad"].ToString();
+                label_entrada_diaria_total.Text = calculo_diario.Rows[0]["ganancia"].ToString();
+            }
+        }
+
+
+        private void monthCalendar_entrada_mensual_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            DateTime d = monthCalendar_entrada_mensual.SelectionRange.Start;
+            string month = d.Month.ToString();
+            string year = d.Year.ToString();
+
+            DataTable dt_mensual = c.Select(@"SELECT codigo AS 'Codigo en Historial', dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Ganancia'
+                                            FROM dbo.historial
+                                            WHERE vigente = 1 AND MONTH(dia_hora) = '" + month + @"'
+                                            AND
+                                            YEAR(dia_hora) = '" + year + @"'
+                                            Order by dia_hora DESC;");
+            dataGridView_entrada_mensual.DataSource = dt_mensual;
+            dataGridView_entrada_mensual.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;///
+
+            //cambiar los labels de cantidad y ganancia
+
+            DataTable calculo_mensual = c.Select(@"SELECT Sum(ganancia) AS ganancia, SUM (cantidad) AS cantidad
+                                                FROM dbo.historial
+                                                WHERE vigente = 1 AND MONTH(dia_hora) = '" + month + @"'
+                                                AND
+                                                YEAR(dia_hora) = '" + year + "';");
+            if (calculo_mensual.Rows.Count > 0)
+            {
+                label_entrada_mensual_cantidad.Text = calculo_mensual.Rows[0]["cantidad"].ToString();
+                label_entrada_mensual_total.Text = calculo_mensual.Rows[0]["ganancia"].ToString();
+            }
+        }
 
 
         /****************************************************************************************************************
@@ -608,72 +685,122 @@ namespace Acix
             groupBox_historial_advertencia.Visible = false;
         }
 
-        private void monthCalendar_entrada_diaria_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            DateTime d = monthCalendar_entrada_diaria.SelectionRange.Start;
-            string day = d.Day.ToString();
-            string month = d.Month.ToString();
-            string year = d.Year.ToString();
-
-            DataTable dt_diaria = c.Select(@"SELECT codigo AS 'Codigo en Historial', dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Ganancia'
-                                            FROM dbo.historial
-                                            WHERE vigente = 1 AND DAY(dia_hora)= '" + day + @"'
-                                            AND
-                                            MONTH(dia_hora) = '" + month + @"'
-                                            AND
-                                            YEAR(dia_hora) = '" + year + @"'
-                                            Order by dia_hora DESC;");
-            dataGridView_entrada_diaria.DataSource = dt_diaria;
-            dataGridView_entrada_diaria.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;///
-
-            //cambiar los labels de cantidad y ganancia
-            DataTable calculo_diario = c.Select(@"SELECT Sum(ganancia) AS ganancia, SUM (cantidad) AS cantidad
-                                                FROM dbo.historial
-                                                WHERE vigente = 1 AND DAY(dia_hora)= '" + day + @"'
-                                                AND
-                                                MONTH(dia_hora) = '" + month + @"'
-                                                AND
-                                                YEAR(dia_hora) = '" + year + @"';");
-
-            if (calculo_diario.Rows.Count > 0)
-            { 
-                label_entrada_diaria_cantidad.Text = calculo_diario.Rows[0]["cantidad"].ToString();
-                label_entrada_diaria_total.Text = calculo_diario.Rows[0]["ganancia"].ToString();
-            }
-        }
-
-
-        private void monthCalendar_entrada_mensual_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            DateTime d = monthCalendar_entrada_mensual.SelectionRange.Start;
-            string month = d.Month.ToString();
-            string year = d.Year.ToString();
-
-            DataTable dt_mensual = c.Select(@"SELECT codigo AS 'Codigo en Historial', dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Ganancia'
-                                            FROM dbo.historial
-                                            WHERE vigente = 1 AND MONTH(dia_hora) = '" + month + @"'
-                                            AND
-                                            YEAR(dia_hora) = '" + year + @"'
-                                            Order by dia_hora DESC;");
-            dataGridView_entrada_mensual.DataSource = dt_mensual;
-            dataGridView_entrada_mensual.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;///
-
-            //cambiar los labels de cantidad y ganancia
-
-            DataTable calculo_mensual = c.Select(@"SELECT Sum(ganancia) AS ganancia, SUM (cantidad) AS cantidad
-                                                FROM dbo.historial
-                                                WHERE vigente = 1 AND MONTH(dia_hora) = '" + month + @"'
-                                                AND
-                                                YEAR(dia_hora) = '" + year + "';");
-            if (calculo_mensual.Rows.Count > 0)
-            {
-                label_entrada_mensual_cantidad.Text = calculo_mensual.Rows[0]["cantidad"].ToString();
-                label_entrada_mensual_total.Text = calculo_mensual.Rows[0]["ganancia"].ToString();
-            }
-        }
 
         /****************************************************************************************************************
          *                                             4.0 FIN HISTORIAL
          ****************************************************************************************************************/
+
+        /****************************************************************************************************************
+        *                                             5.0 INICIOAnadir equivalentes
+        ****************************************************************************************************************/
+
+        private void button_anadir_equivalentes_selec_Click(object sender, EventArgs e)
+        {
+            DataTable dt = c.Select(@"SELECT dbo.producto.codigo, CONCAT(dbo.producto.codigo, ' / ' , dbo.producto.marca,' / ' , grado, ' / ', contenido , ' / ', unidad) AS description 
+                                    FROM dbo.producto
+                                    WHERE dbo.producto.codigo LIKE '%" + textBox_anadir_equivalentes_codigo.Text + "%';");
+            label_anadir_equivalentes_desc.Text = dt.Rows[0]["description"].ToString();
+        }
+
+        private void textBox_anadir_equivalentes_codigo_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox_anadir_equivalentes_codigo.Text != "")
+            {
+                button_anadir_equivalentes_selec.Enabled = true;
+            }
+            else
+            {
+                button_anadir_equivalentes_selec.Enabled = false;
+            }
+        }
+
+        private void textBox_anadir_equivalentes_grado_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox_anadir_equivalentes_grado.Text != "")
+            {
+                button_anadir_equivalentes_anadir.Enabled = true;
+            }
+            else
+            {
+                button_anadir_equivalentes_anadir.Enabled = false;
+            }
+        }
+
+        private void button_anadir_equivalentes_anadir_Click(object sender, EventArgs e)
+        {
+            string cod = textBox_anadir_equivalentes_grado.Text;
+            cur_product = c.Select(@"SELECT dbo.producto.codigo AS codigo, CONCAT(dbo.producto.codigo, ' / ' , dbo.producto.marca,' / ' , grado, ' / ', contenido , ' / ', unidad) AS description 
+                                    FROM dbo.producto 
+                                    WHERE dbo.producto.grado = '" + cod + "';");
+
+            foreach (DataRow row in cur_product.Rows)
+            {
+                string descripcion = row["description"].ToString();
+
+                //antes de agregar comprobar que no se agregue un elemento repetido.
+                bool repetido = false;
+
+                foreach (String item in listBox_anadir_equivalentes.Items)
+                {
+                    if (item == descripcion) repetido = true;
+                }
+                if (!repetido) listBox_anadir_equivalentes.Items.Add(descripcion);
+            }
+
+            //fin antes de agregar comprobar que no se agregue un elemento repetido.
+            if (listBox_anadir_equivalentes.Items.Count > 0)
+                button_anadir_equivalentes__crear.Enabled = true;
+
+            textBox_anadir_equivalentes_grado.Text = "";
+        }
+
+        private void listBox_anadir_equivalentes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button_anadir_equivalentes_quitar.Enabled = true;
+        }
+
+        private void button_anadir_equivalentes_quitar_Click(object sender, EventArgs e)
+        {
+            listBox_anadir_equivalentes.Items.Remove(listBox_anadir_equivalentes.SelectedItem);
+            button_anadir_equivalentes_quitar.Enabled = false;
+        }
+
+        private void button_anadir_equivalentes__crear_Click(object sender, EventArgs e)
+        {
+            string codigo = textBox_anadir_equivalentes_codigo.Text;
+            
+            if (listBox_anadir_equivalentes.Items.Count > 0)
+            {
+                foreach (String item in listBox_anadir_equivalentes.Items)
+                {
+                    if (!c.Insert("INSERT INTO dbo.Equivalencias (codigo1,codigo2) VALUES (" + codigo + "," + get_listboxequivalentes_id(item) + ");"))
+                    {
+                        textBox_anadir_equivalentes_codigo.Text = "";
+                        textBox_anadir_equivalentes_grado.Text = "";
+                        label_anadir_equivalentes_desc.Text = "";
+                        MessageBox.Show("Error al insertar los equivalentes del producto");
+                        break;
+                    }
+                }
+            }
+            //fin añadir equivalentes 
+
+            MessageBox.Show("Equivalentes añadidos exitosamente!");
+
+            textBox_anadir_equivalentes_codigo.Text = "";
+            textBox_anadir_equivalentes_grado.Text = "";
+            label_anadir_equivalentes_desc.Text = "";
+
+            button_anadir_equivalentes__crear.Enabled = false;
+            listBox_anadir_equivalentes.Items.Clear();     
+        }
+
+        /****************************************************************************************************************
+        *                                             5.0 FIN Anadir equivalentes
+        ****************************************************************************************************************/
+
+
+
+
     }
 }
