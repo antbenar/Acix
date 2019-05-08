@@ -1,0 +1,8 @@
+C:\Users\Anthony\Documents\Anthony\Programas_escritorio(Acix)\Acix\Acix\Acix\bin\x64\Debug\Acix.exe.config
+C:\Users\Anthony\Documents\Anthony\Programas_escritorio(Acix)\Acix\Acix\Acix\bin\x64\Debug\Acix.exe
+C:\Users\Anthony\Documents\Anthony\Programas_escritorio(Acix)\Acix\Acix\Acix\bin\x64\Debug\Acix.pdb
+C:\Users\Anthony\Documents\Anthony\Programas_escritorio(Acix)\Acix\Acix\Acix\obj\x64\Debug\Acix.Acix.resources
+C:\Users\Anthony\Documents\Anthony\Programas_escritorio(Acix)\Acix\Acix\Acix\obj\x64\Debug\Acix.Properties.Resources.resources
+C:\Users\Anthony\Documents\Anthony\Programas_escritorio(Acix)\Acix\Acix\Acix\obj\x64\Debug\Acix.csproj.GenerateResource.Cache
+C:\Users\Anthony\Documents\Anthony\Programas_escritorio(Acix)\Acix\Acix\Acix\obj\x64\Debug\Acix.exe
+C:\Users\Anthony\Documents\Anthony\Programas_escritorio(Acix)\Acix\Acix\Acix\obj\x64\Debug\Acix.pdb

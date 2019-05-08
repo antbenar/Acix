@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace Acix.AcixClasses
 {
@@ -42,7 +42,7 @@ namespace Acix.AcixClasses
         }
 
         //Selecting Data from Database
-        public DataTable Update(string query)
+        public bool Update(string query)
         {
             ///Step 1: Database Connection
             SqlConnection conn = new SqlConnection(myconnstrng);
@@ -60,13 +60,11 @@ namespace Acix.AcixClasses
             }
             catch (Exception ex)
             {
-
-            }
-            finally
-            {
                 conn.Close();
+                return false;
             }
-            return dt;
+            conn.Close();
+            return true;
         }
 
         public bool Insert(string query)

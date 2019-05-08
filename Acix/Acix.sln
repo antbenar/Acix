@@ -5,16 +5,30 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acix", "Acix\Acix.csproj", "{1013FAC8-2BFD-40F2-BA5B-2871EF68B57D}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AcixSetup", "AcixSetup\AcixSetup.vdproj", "{BD942180-6288-4681-A4B4-35C4F7BAB35F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1013FAC8-2BFD-40F2-BA5B-2871EF68B57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1013FAC8-2BFD-40F2-BA5B-2871EF68B57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1013FAC8-2BFD-40F2-BA5B-2871EF68B57D}.Debug|x64.ActiveCfg = Debug|x64
+		{1013FAC8-2BFD-40F2-BA5B-2871EF68B57D}.Debug|x64.Build.0 = Debug|x64
 		{1013FAC8-2BFD-40F2-BA5B-2871EF68B57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1013FAC8-2BFD-40F2-BA5B-2871EF68B57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1013FAC8-2BFD-40F2-BA5B-2871EF68B57D}.Release|x64.ActiveCfg = Release|x64
+		{1013FAC8-2BFD-40F2-BA5B-2871EF68B57D}.Release|x64.Build.0 = Release|x64
+		{BD942180-6288-4681-A4B4-35C4F7BAB35F}.Debug|Any CPU.ActiveCfg = Debug
+		{BD942180-6288-4681-A4B4-35C4F7BAB35F}.Debug|x64.ActiveCfg = Debug
+		{BD942180-6288-4681-A4B4-35C4F7BAB35F}.Debug|x64.Build.0 = Debug
+		{BD942180-6288-4681-A4B4-35C4F7BAB35F}.Release|Any CPU.ActiveCfg = Release
+		{BD942180-6288-4681-A4B4-35C4F7BAB35F}.Release|x64.ActiveCfg = Release
+		{BD942180-6288-4681-A4B4-35C4F7BAB35F}.Release|x64.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
