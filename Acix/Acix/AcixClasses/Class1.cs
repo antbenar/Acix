@@ -7,6 +7,18 @@ using System.Data.SqlClient;
 //using System.Text;
 //using System.Threading.Tasks;
 
+/*---------------------------------------
+ * --- DE LA TABLA PRODUCTO
+ * STOCK ES EL TOTAL DE LOS PRODUCTOS
+ * CANTIDAD PARCIAL -> ES LO QUE VA DE LA COMPRA ACTUAL SELECCIONADA
+ * 
+ * ---DE LA TABLA COMPRA
+ * CANTIDAD -> CANTIDAD QUE ENTRA EN LA COMPRA
+ * CANTIDAD VIGENTE -> DE ESA CANTIDAD, CUANTO AUN ME QUEDA
+ * CANTIDAD ACTUAL -> EL TOTAL DEL STOCK DISPONIBLE, SUMANDO TODAS LAS COMPRAS DE UN PRODUCTO
+ * 
+ * --------------------------------------*/
+
 namespace Acix.AcixClasses
 {
     public class Class1

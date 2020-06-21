@@ -35,7 +35,17 @@ namespace Acix
             groupBox_Resultado.BringToFront();
             groupBox_Equivalencias.BringToFront();
             groupBox_listado_advertencia.BringToFront();
-            groupBox_proveedor_resultadoProductos.BringToFront();
+            groupBox_compra_resultado.BringToFront();
+            groupBox_kardex.BringToFront();
+            /*
+            //metodo para agregar codigo a producto en historial
+            DataTable dt = c.Select("SELECT descripcion_producto AS descripcion FROM dbo.historial");
+            for (int i = 0; i < dt.Rows.Count; ++i)
+            {
+                string descripcion = dt.Rows[i]["descripcion"].ToString();
+                c.Update("UPDATE dbo.historial SET codigo_producto = " + get_listboxequivalentes_id(descripcion) + " WHERE descripcion_producto = '"+ descripcion +"';");
+            }
+            */
         }
 
         /****************************************************************************************************************
@@ -45,99 +55,39 @@ namespace Acix
         {
             Initialize_combobox_contenido();
             Initialize_combobox_comprobantes();
-            Initialize_combobox_proveedor_contenidoProducto();
-            Initialize_combobox_clientes_apellido();
-            Initialize_comboBox_proveedor();
+            Initialize_combobox_compra_contenido();
 
             label_venta_precio_total.Text = "0";
             //**************************************listado de prodcutos**************************************
-            DataTable dt = c.Select(@"SELECT dbo.producto.codigo AS Codigo, dbo.producto.marca AS Marca, grado AS Grado, contenido AS Contenido, unidad AS Unidad, stock as Stock, precio_compra AS 'Precio de compra', precio_venta AS 'Precio de venta', proveedor_nombre AS 'Proveedor'
+            DataTable dt = c.Select(@"SELECT dbo.producto.codigo AS Codigo, dbo.producto.marca AS Marca, grado AS Grado, contenido AS Contenido, unidad AS Unidad, stock AS 'Cantidad en Stock'
                                     FROM dbo.producto;");
             dataGridView_listado.DataSource = dt;
             for (int i = 0; i < dataGridView_listado.Columns.Count; ++i)
                 dataGridView_listado.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridView_listado.Columns[0].ReadOnly = true;
 
-            //******************************************historial************************************
-            DataTable dt_historial = c.Select(@"SELECT dbo.historial.codigo AS Codigo, dia_hora AS 'Día y hora', dbo.comprobante.nombre AS 'Tipo Comprobante', (CAST(dbo.comprobante.serie AS varchar(100))+ ' N° ' +CAST(dbo.comprobante.numero AS varchar(100))) AS 'Numero de Comprobante',  dbo.historial.nombres_cliente AS Cliente, descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad', precio_venta AS 'Precio de venta', ganancia AS 'Ganancia', CASE WHEN vigente = 1 THEN 'SI' ELSE 'NO' END AS Vigente
-                                        FROM dbo.historial
-                                        LEFT JOIN dbo.comprobante ON dbo.comprobante.cod_historial = dbo.historial.codigo
-                                        Order by dia_hora DESC;");
-            dataGridView_historial.DataSource = dt_historial;
-            for( int i=0; i< dataGridView_historial.Columns.Count; ++i)
-                dataGridView_historial.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView_listado.Columns[0].ReadOnly = true;
+            //******************************************historial// venta************************************
+            InitializeVenta();
 
-
-            //****************************** data grid clientes*******************************
-            DataTable dt_clientes = c.Select(@"SELECT codigo AS 'Codigo' , nombre AS 'Nombre', apellidos AS 'Apellidos', telefono AS 'Telefono', marca AS 'Marca', vehiculo AS 'Vehiculo', motor AS 'Motor', tipo_aceite AS 'Tipo de Aceite', tipo_filtro AS 'Tipo de Filtro'
-                                        FROM dbo.cliente
-                                        Order by apellidos DESC;");
-            dataGridView_listado_clientes.DataSource = dt_clientes;
-
-            for (int i = 0; i < dataGridView_listado_clientes.Columns.Count; ++i)
-                dataGridView_listado_clientes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView_listado_clientes.Columns[0].ReadOnly = true;
-            dataGridView_listado_clientes.Columns[1].ReadOnly = true;
-            dataGridView_listado_clientes.Columns[2].ReadOnly = true;
-
-            //****************************** data grid proveedor*******************************
-            DataTable dt_proveedor = c.Select(@"SELECT codigo AS 'Codigo', nombre AS 'Nombre', telefono AS 'Telefono', direccion AS 'Direccion'
-                                        FROM dbo.proveedor
-                                        Order by nombre DESC;");
-            dataGridView_proveedor_listado.DataSource = dt_proveedor;
-            for (int i = 0; i < dataGridView_proveedor_listado.Columns.Count; ++i)
-                dataGridView_proveedor_listado.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridView_proveedor_listado.Columns[0].ReadOnly = true;
-
-            //****************************calcular datos de entrada diaria********************************
-            //calcular cantidades vendidas y ganancia
-            DataTable calculo_diario = c.Select(@"SELECT Sum(ganancia) AS ganancia, SUM (cantidad) AS cantidad
-                                                FROM dbo.historial
-                                                WHERE vigente = 1 AND CONVERT(DATE, dia_hora) = CONVERT(date, Getdate());");
-
-            if (calculo_diario.Rows.Count > 0)
-            {
-                label_entrada_diaria_cantidad.Text = calculo_diario.Rows[0]["cantidad"].ToString();
-                label_entrada_diaria_total.Text = calculo_diario.Rows[0]["ganancia"].ToString();
-            }
-
-            //agregar tabla a la base de datos
-            DataTable dt_diaria = c.Select(@"SELECT dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Ganancia'
-                                            FROM dbo.historial
-                                            WHERE vigente = 1 AND CONVERT(DATE, dia_hora) = CONVERT(date, Getdate())
-                                            Order by dia_hora DESC;");
-            dataGridView_entrada_diaria.DataSource = dt_diaria;
-            for (int i = 0; i < dataGridView_entrada_diaria.Columns.Count; ++i)
-                dataGridView_entrada_diaria.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-
-            //******************************calcular datos de entrada mensual*******************************
-            //calcular cantidades vendidas y ganancia
-            DataTable calculo_mensual = c.Select(@"SELECT Sum(ganancia) AS ganancia, SUM (cantidad) AS cantidad
-                                                FROM dbo.historial
-                                                WHERE vigente = 1 AND MONTH(dia_hora) = MONTH(dateadd(dd, -1, GetDate()))
-                                                AND
-                                                YEAR(dia_hora) = YEAR(dateadd(dd, -1, GetDate()));");
-
-            if (calculo_mensual.Rows[0]["cantidad"].ToString() != "")
-            {
-                label_entrada_mensual_cantidad.Text = calculo_mensual.Rows[0]["cantidad"].ToString();
-                label_entrada_mensual_total.Text = calculo_mensual.Rows[0]["ganancia"].ToString();
-            }
-
-            //agregar tabla a la base de datos
-            DataTable dt_mensual = c.Select(@"SELECT dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Ganancia'
-                                            FROM dbo.historial
-                                            WHERE vigente = 1 AND MONTH(dia_hora) = MONTH(dateadd(dd, -1, GetDate()))
+            //****************************************** compra ************************************
+             
+            DataTable dt_compras = c.Select(@"SELECT dia_hora AS 'Fecha', cantidad AS 'Cantidad', proveedor AS 'Proveedor', descripcion_producto AS Producto, precio_compra AS 'Precio de compra'
+                                            FROM dbo.compra
+                                            WHERE MONTH(dia_hora) = MONTH(dateadd(dd, -1, GetDate()))
                                             AND
                                             YEAR(dia_hora) = YEAR(dateadd(dd, -1, GetDate()))
                                             Order by dia_hora DESC;");
-            dataGridView_entrada_mensual.DataSource = dt_mensual;
+            dataGridView_compra.DataSource = dt_compras;
+            for (int i = 0; i < dataGridView_compra.Columns.Count; ++i)
+                dataGridView_compra.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-            for (int i = 0; i < dataGridView_entrada_diaria.Columns.Count; ++i)
-                dataGridView_entrada_mensual.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        
+            //****************************calcular datos de entrada diaria********************************
+            InitializeEntradaDiaria();
+
+            //******************************calcular datos de entrada mensual*******************************
+            InitializeEntradaMensual();
+
+
         }
 
         //Fin inicializar data grids
@@ -269,9 +219,6 @@ namespace Acix
             textBox_nuevo_grado.Text = "";
             textBox_nuevo_contenido.Text = "";
             textBox_nuevo_unidad.Text = "";
-            textBox_nuevo_stock.Text = "";
-            textBox_nuevo_precioCompra.Text = "";
-            textBox_nuevo_precio_venta.Text = "";
 
             button_nuevo_crear.Enabled = false;
         }
@@ -284,9 +231,9 @@ namespace Acix
             string grado = textBox_nuevo_grado.Text.ToUpper();
             string contenido = textBox_nuevo_contenido.Text.ToUpper();
             string unidad = textBox_nuevo_unidad.Text.ToUpper();
-            string stock = textBox_nuevo_stock.Text.ToUpper();
-            string precio_venta = textBox_nuevo_precio_venta.Text.ToUpper();
-            string precio_compra = textBox_nuevo_precioCompra.Text.ToUpper();
+            string stock = "0";
+            string precio_venta = "0";
+            string precio_compra = "0";
 
 
 
@@ -422,26 +369,6 @@ namespace Acix
             textBox_venta_num_comprobante.Text = numero_;
         }
 
-        //inicio actualizacion nombres clientes
-        private void textBox_pedidos_cliente_apellido_TextChanged(object sender, EventArgs e)
-        {
-            //line 57
-            if (textBox_pedidos_cliente_apellido.Text == "") return;
-
-            string apellido_cliente = textBox_pedidos_cliente_apellido.Text.ToString();
-
-            //--------------------------actualizar combo_box_nombre
-            comboBox_pedidos_nombre_cliente.Items.Clear(); comboBox_pedidos_nombre_cliente.Text = "";
-
-            DataTable dt = c.Select("SELECT DISTINCT dbo.cliente.nombre FROM dbo.cliente WHERE dbo.cliente.apellidos LIKE '%" + apellido_cliente + "%';");
-            foreach (DataRow row in dt.Rows)
-            {
-                comboBox_pedidos_nombre_cliente.Items.Add((string)row[0]);
-            }
-        }
-
-        //fin actualizacion nombres clientes
-
 
         private void Btn_descripcion_Click(object sender, EventArgs e)
         {
@@ -480,14 +407,16 @@ namespace Acix
             public string general;
             public string descripcion;
             public string cantidad;
+            public string cantidad_actual;
             public string precio_venta;
             public string precio_total;
             public string ganancia;
-            public data(int pos_, string descripcion_, string cantidad_, string precio_venta_, string precio_total_, string ganancia_)
+            public data(int pos_, string descripcion_, string cantidad_, string cantidad_actual_, string precio_venta_, string precio_total_, string ganancia_)
             {
                 pos = pos_;
                 descripcion =descripcion_;
                 cantidad = cantidad_;
+                cantidad_actual = cantidad_actual_;
                 precio_venta = precio_venta_;
                 precio_total = precio_total_;
                 ganancia = ganancia_;
@@ -508,6 +437,44 @@ namespace Acix
             textBox_cantidad.Text = "";
         }
 
+        private double obtenerGanancia(string cod_producto, decimal cantidad) //calcular la ganancia consultando todos los precios del producto en stock disponibles
+        {
+            decimal precio_venta = decimal.Parse(textBox_pedidos_precio_venta.Text.ToString());
+            
+            DataTable dt_prodcuto = c.Select("SELECT * FROM dbo.producto WHERE codigo = " + cod_producto + ";");
+            decimal cantidad_actual = decimal.Parse(dt_prodcuto.Rows[0]["cantidad_parcial"].ToString());
+            decimal precio_compra = decimal.Parse(dt_prodcuto.Rows[0]["precio_compra"].ToString());
+
+            if (cantidad <= cantidad_actual)
+            {
+                return (double)((precio_venta - precio_compra) * cantidad);//ganancia
+            }
+
+            double ganancia = (double)((precio_venta - precio_compra) * cantidad_actual);//venta parcial(con todo lo que hay hasta ese numero de compra
+            cantidad = cantidad - cantidad_actual;
+
+            DataTable dt = c.Select("SELECT * FROM dbo.compra WHERE cantidad_vigente > 0 AND codigo_producto = " + cod_producto + " ORDER BY codigo;");
+
+            for (int i = 0; i < dt.Rows.Count; ++i)
+            {
+                decimal cantidad_compra_actual = decimal.Parse(dt.Rows[i]["cantidad_vigente"].ToString());
+                precio_compra = decimal.Parse(dt.Rows[i]["precio_compra"].ToString()); ;
+
+                if (cantidad < cantidad_compra_actual)
+                {
+                    ganancia += (double)((precio_venta - precio_compra) * cantidad);
+                    return ganancia;
+                }
+                else
+                {
+                    ganancia += (double)((precio_venta - precio_compra) * cantidad_compra_actual);
+                    cantidad = cantidad - cantidad_compra_actual;
+                }
+            }
+
+            return ganancia;
+        }
+
         private void button_venta_anadir_Click(object sender, EventArgs e)
         {
             string descripcion = cur_product.Rows[0]["description"].ToString();//obtener atributos del producto para luego insertar
@@ -515,10 +482,13 @@ namespace Acix
             decimal precio_venta = decimal.Parse(textBox_pedidos_precio_venta.Text.ToString());
             decimal precio_compra = decimal.Parse(cur_product.Rows[0]["precio_compra"].ToString());
             decimal precio_total = precio_venta * cantidad;
-            double ganancia = (double)((precio_venta - precio_compra) * cantidad);
+            double ganancia = obtenerGanancia(get_listboxequivalentes_id(descripcion), cantidad);
+            
+            DataTable dt_prodcuto = c.Select("SELECT stock FROM dbo.producto WHERE codigo = " + get_listboxequivalentes_id(descripcion) + ";");
+            decimal cantidad_actual = decimal.Parse(dt_prodcuto.Rows[0]["stock"].ToString()) - cantidad;
 
             int pos = listado.Count;
-            listado.Add(new data(pos, descripcion, cantidad.ToString(), precio_venta.ToString(), precio_total.ToString(), ganancia.ToString()));
+            listado.Add(new data(pos, descripcion, cantidad.ToString(), cantidad_actual.ToString() ,precio_venta.ToString(), precio_total.ToString(), ganancia.ToString()));
                
             //actualizar listbox 
             listBox_venta_listado.DataSource = listado;
@@ -731,24 +701,95 @@ namespace Acix
             listado.Clear();
             listBox_venta_listado.DataSource=listado;
 
-            comboBox_pedidos_nombre_cliente.Text = "";
             textBox_pedidos_cliente_apellido.Text = "";
         }
 
-
-
-
-        private string get_codigo_cliente()
+        private void actualizarCantidadVigenteCompra(string cod_producto, decimal cantidad_) //calcular la ganancia consultando todos los precios del producto en stock disponibles
         {
-            string apellido_cliente = textBox_pedidos_cliente_apellido.Text.ToString();
-            string nombre_cliente = comboBox_pedidos_nombre_cliente.Text.ToString();
 
-            DataTable cur_client = c.Select(@" SELECT codigo
-                                                FROM dbo.cliente
-                                                WHERE dbo.cliente.apellidos LIKE '%" + apellido_cliente + "%' and dbo.cliente.nombre LIKE '%" + nombre_cliente + "%'; ");
-            if (cur_client.Rows.Count > 0) return cur_client.Rows[0]["codigo"].ToString();
-            else return "";
+            DataTable dt_prodcuto = c.Select("SELECT * FROM dbo.producto WHERE codigo = " + cod_producto + ";");
+            decimal cantidad_actual = decimal.Parse(dt_prodcuto.Rows[0]["cantidad_parcial"].ToString());
+            decimal cantidad = cantidad_;
+
+            if (cantidad <= cantidad_actual)        //lo que ya está cargado en producto
+            {
+                c.Update("UPDATE dbo.producto SET stock = stock - " + cantidad + ", cantidad_parcial = cantidad_parcial - " + cantidad + " WHERE codigo = " + cod_producto + ";");
+                return;
+            }
+
+            cantidad = cantidad - cantidad_actual;
+
+            DataTable dt = c.Select("SELECT * FROM dbo.compra WHERE cantidad_vigente > 0 AND codigo_producto = " + cod_producto + " ORDER BY codigo;");
+
+            for (int i = 0; i < dt.Rows.Count; ++i)
+            {
+                decimal cantidad_compra_actual = decimal.Parse(dt.Rows[i]["cantidad_vigente"].ToString());
+                string codigo_compra = dt.Rows[i]["codigo"].ToString();
+
+                if (cantidad < cantidad_compra_actual)
+                {
+                    string precio_compra = dt.Rows[i]["precio_compra"].ToString();
+                    string cantidad_vigente = dt.Rows[i]["cantidad_vigente"].ToString();
+
+                    //MessageBox.Show("pc = " + precio_compra + ", cv = " + cantidad_vigente + ", ca = " + cantidad);
+
+                    c.Update("UPDATE dbo.compra SET cantidad_vigente = 0   WHERE codigo = " + codigo_compra + ";");
+                    c.Update("UPDATE dbo.producto SET stock = stock - " + cantidad_ + ", precio_compra = " + precio_compra + " , cantidad_parcial = " + cantidad_vigente + " - " + cantidad + " WHERE codigo = " + cod_producto + ";");
+                    return;
+                }
+                else
+                {
+                    c.Update("UPDATE dbo.compra SET cantidad_vigente = 0 WHERE codigo = " + codigo_compra + ";");
+                    cantidad = cantidad - cantidad_compra_actual;
+                }
+            }
         }
+
+        private string GetPrecioTotal(string cod_producto, decimal cantidad_) //calcular la ganancia consultando todos los precios del producto en stock disponibles
+        {
+
+            DataTable dt_prodcuto = c.Select("SELECT * FROM dbo.producto WHERE codigo = " + cod_producto + ";");
+            decimal cantidad_actual = decimal.Parse(dt_prodcuto.Rows[0]["cantidad_parcial"].ToString());
+            decimal precioCompraTotal = 0;//----------------
+            string result = "";
+
+            decimal cantidad = cantidad_;
+
+            if (cantidad <= cantidad_actual)        //lo que ya está cargado en producto
+            {
+                result = cantidad.ToString() + " * " + dt_prodcuto.Rows[0]["precio_compra"].ToString();//--------------
+                return result;
+            }
+            else
+            {
+                result = cantidad_actual.ToString() + " * " + dt_prodcuto.Rows[0]["precio_compra"].ToString() + " + "; 
+                cantidad = cantidad - cantidad_actual;
+            }
+
+            DataTable dt = c.Select("SELECT * FROM dbo.compra WHERE cantidad_vigente > 0 AND codigo_producto = " + cod_producto + " ORDER BY codigo;");
+
+            for (int i = 0; i < dt.Rows.Count; ++i)
+            {
+                string precio_compra = dt.Rows[i]["precio_compra"].ToString();
+                decimal cantidad_compra_actual = decimal.Parse(dt.Rows[i]["cantidad_vigente"].ToString());
+
+                if (cantidad < cantidad_compra_actual)
+                {
+                    result += cantidad.ToString() + " * " + precio_compra;//-------------
+                    precioCompraTotal += decimal.Parse(precio_compra) * cantidad;//--------------
+                    //MessageBox.Show(precioCompraTotal.ToString());
+                    return result;
+                }
+                else
+                {
+                    result += cantidad_compra_actual.ToString() + " * " + precio_compra + " + ";//-------------
+                    precioCompraTotal += decimal.Parse(precio_compra) * cantidad_compra_actual;//--------------
+                    cantidad = cantidad - cantidad_compra_actual;
+                }
+            }
+            return result;//no sirve
+        }
+
 
         private void button_vender_Click(object sender, EventArgs e)
         {
@@ -760,22 +801,13 @@ namespace Acix
                 return;
             }
 
-
             //---datos generales de la generacion de la venta
-            string fecha_hora = DateTime.Now.ToString(dateformat);//mi pc
+            DateTime d = venta_calendar.SelectionRange.Start;
+            TimeSpan ts = DateTime.Now.TimeOfDay;
+            d = d.Date + ts;
+            string fecha_hora = d.ToString(dateformat);//se cambia el formato de la fecha
 
-            string apellido_cliente = textBox_pedidos_cliente_apellido.Text.ToString();
-            string nombre_cliente = comboBox_pedidos_nombre_cliente.Text.ToString();
-            string codigo_cliente = get_codigo_cliente();
-            //-----create client
-            if (codigo_cliente == "")
-            {
-                c.Insert("INSERT INTO dbo.cliente (nombre, apellidos) VALUES ('" + nombre_cliente + "','" + apellido_cliente + "');");
-                codigo_cliente = get_codigo_cliente();
-            }
-            //----- end create client----//
-
-
+            string nombre_cliente = textBox_pedidos_cliente_apellido.Text.ToString();
 
             string tipo_comprobante = comboBox_venta_tipoComprobante.Text.ToString();
             string serie = label_venta_comprobanteSerie.Text.ToString();
@@ -787,11 +819,16 @@ namespace Acix
                 //---------------
                 string descripcion = listado[i].descripcion;
                 string cantidad = listado[i].cantidad;
+                string cantidad_actual = listado[i].cantidad_actual;
                 string precio_venta = listado[i].precio_venta;
                 string ganancia = listado[i].ganancia;
-                //---------------
 
-                if (c.Insert("INSERT INTO dbo.historial (cliente_codigo, nombres_cliente,descripcion_producto, dia_hora, cantidad, precio_venta, ganancia, vigente) VALUES (" + codigo_cliente + ",'" + apellido_cliente + ", " + nombre_cliente + "','" + descripcion + "','" + fecha_hora + "'," + cantidad + "," + precio_venta + "," + ganancia + ",1);"))
+                string codigo = get_listboxequivalentes_id(descripcion);
+                string detallesCompra = GetPrecioTotal(codigo, decimal.Parse(cantidad));
+                
+                //---------------
+                
+                if (c.Insert("INSERT INTO dbo.historial (nombres_cliente,descripcion_producto, dia_hora, cantidad, precio_venta, ganancia, codigo_producto, cantidad_actual, detalles_compra) VALUES ('" + nombre_cliente + "','" + descripcion + "','" + fecha_hora + "'," + cantidad + "," + precio_venta + "," + ganancia + ","+ get_listboxequivalentes_id(descripcion) +"," + cantidad_actual + ", '" + detallesCompra + "');"))
                 {
                     //crear nuevo comprobante de pago
                     DataTable dt_hist = c.Select("SELECT MAX(codigo) As cur_ID FROM dbo.historial;");
@@ -800,8 +837,7 @@ namespace Acix
                     c.Insert("INSERT INTO dbo.comprobante(nombre, serie, numero, cod_historial) VALUES('" + tipo_comprobante + "', '" + serie + "', " + numero + "," + cod_historial + ") ");
 
                     //actualizar stock
-                    string codigo = get_listboxequivalentes_id(descripcion);
-                    c.Update("UPDATE dbo.producto SET stock = stock -" + cantidad + "WHERE codigo =" + codigo + ";");
+                    actualizarCantidadVigenteCompra(codigo, decimal.Parse(cantidad));
                 }
                 else
                 {
@@ -819,7 +855,6 @@ namespace Acix
             }
             else
             {
-                //MessageBox.Show("INSERT INTO dbo.historial (cliente_codigo, nombres_cliente,descripcion_producto, dia_hora, cantidad, ganancia, vigente) VALUES (" + codigo_cliente + ",'" + apellido_cliente + ", " + nombre_cliente + "','" + descripcion + "','" + fecha_hora + "'," + cantidad + "," + ganancia + ",1);");
                 MessageBox.Show("Falló al registrar venta");
             }
 
@@ -844,28 +879,29 @@ namespace Acix
         /****************************************************************************************************************
         *                                             3.0 INICIO ENTRADAS
         ****************************************************************************************************************/
-        private void monthCalendar_entrada_diaria_DateChanged(object sender, DateRangeEventArgs e)
+        void InitializeEntradaDiaria()
         {
             DateTime d = monthCalendar_entrada_diaria.SelectionRange.Start;
             string day = d.Day.ToString();
             string month = d.Month.ToString();
             string year = d.Year.ToString();
 
-            DataTable dt_diaria = c.Select(@"SELECT codigo AS 'Codigo en Historial', dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Ganancia'
+            DataTable dt_diaria = c.Select(@"SELECT dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Ganancia'
                                             FROM dbo.historial
-                                            WHERE vigente = 1 AND DAY(dia_hora)= '" + day + @"'
+                                            WHERE DAY(dia_hora)= '" + day + @"'
                                             AND
                                             MONTH(dia_hora) = '" + month + @"'
                                             AND
                                             YEAR(dia_hora) = '" + year + @"'
                                             Order by dia_hora DESC;");
             dataGridView_entrada_diaria.DataSource = dt_diaria;
-            dataGridView_entrada_diaria.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;///
+            for (int i = 0; i < dataGridView_entrada_diaria.Columns.Count; ++i)
+                dataGridView_entrada_diaria.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             //cambiar los labels de cantidad y ganancia
             DataTable calculo_diario = c.Select(@"SELECT Sum(ganancia) AS ganancia, SUM (cantidad) AS cantidad
                                                 FROM dbo.historial
-                                                WHERE vigente = 1 AND DAY(dia_hora)= '" + day + @"'
+                                                WHERE DAY(dia_hora)= '" + day + @"'
                                                 AND
                                                 MONTH(dia_hora) = '" + month + @"'
                                                 AND
@@ -876,176 +912,136 @@ namespace Acix
                 label_entrada_diaria_cantidad.Text = calculo_diario.Rows[0]["cantidad"].ToString();
                 label_entrada_diaria_total.Text = calculo_diario.Rows[0]["ganancia"].ToString();
             }
+            else
+            {
+                label_entrada_diaria_cantidad.Text = "0.00";
+                label_entrada_diaria_total.Text = "0.00";
+            }
         }
 
-
-        private void monthCalendar_entrada_mensual_DateChanged(object sender, DateRangeEventArgs e)
+        void InitializeEntradaMensual()
         {
             DateTime d = monthCalendar_entrada_mensual.SelectionRange.Start;
             string month = d.Month.ToString();
             string year = d.Year.ToString();
 
-            DataTable dt_mensual = c.Select(@"SELECT codigo AS 'Codigo en Historial', dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Ganancia'
-                                            FROM dbo.historial
-                                            WHERE vigente = 1 AND MONTH(dia_hora) = '" + month + @"'
-                                            AND
-                                            YEAR(dia_hora) = '" + year + @"'
-                                            Order by dia_hora DESC;");
+            DataTable dt_mensual = c.Select(@"SELECT dia_hora AS 'Día y hora', descripcion_producto AS 'Descripción del producto', cantidad AS 'Cantidad vendida', ganancia AS 'Entrada', null AS 'Salida'
+                                                FROM dbo.historial
+                                                WHERE MONTH(dia_hora) = '" + month + @"' AND
+                                                YEAR(dia_hora) = '" + year + @"'
+                                                UNION
+                                                SELECT dia_hora AS 'Día y hora', descripcion AS 'Descripción del producto', null AS 'Cantidad vendida', null AS 'Entrada', costo AS 'Salida'
+                                                FROM dbo.gastos
+                                                WHERE MONTH(dia_hora) = '" + month + @"' AND
+                                                YEAR(dia_hora) = '" + year + @"'
+                                                Order by dia_hora;");
+
             dataGridView_entrada_mensual.DataSource = dt_mensual;
-            dataGridView_entrada_mensual.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;///
+            for (int i = 0; i < dataGridView_entrada_mensual.Columns.Count; ++i)
+                dataGridView_entrada_mensual.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
             //cambiar los labels de cantidad y ganancia
 
             DataTable calculo_mensual = c.Select(@"SELECT Sum(ganancia) AS ganancia, SUM (cantidad) AS cantidad
                                                 FROM dbo.historial
-                                                WHERE vigente = 1 AND MONTH(dia_hora) = '" + month + @"'
+                                                WHERE MONTH(dia_hora) = '" + month + @"'
                                                 AND
                                                 YEAR(dia_hora) = '" + year + "';");
-            if (calculo_mensual.Rows.Count > 0)
+
+            if (calculo_mensual.Rows.Count > 0 && calculo_mensual.Rows[0]["cantidad"].ToString() != "")
             {
                 label_entrada_mensual_cantidad.Text = calculo_mensual.Rows[0]["cantidad"].ToString();
                 label_entrada_mensual_total.Text = calculo_mensual.Rows[0]["ganancia"].ToString();
+
+                //------------------/actualizar los gastos de la entrada mensual
+                DataTable calculo_mensual_gastos = c.Select(@"SELECT Sum(costo) AS gastos
+                                                                FROM dbo.gastos
+                                                                WHERE MONTH(dia_hora) = '" + month + @"'
+                                                                AND
+                                                                YEAR(dia_hora) = '" + year + "';");
+
+                if (calculo_mensual_gastos.Rows.Count > 0 && calculo_mensual_gastos.Rows[0]["gastos"].ToString() != "")
+                {
+
+
+                    string gastos_ = calculo_mensual_gastos.Rows[0]["gastos"].ToString();
+
+                    decimal gastos = decimal.Parse(gastos_);
+                    decimal ganancia = decimal.Parse(label_entrada_mensual_total.Text.ToString());
+
+                    label_entrada_mensual_gastos.Text = gastos_;
+                    label_entrada_mensual_gananciaTotal.Text = (ganancia - gastos).ToString();
+                }
+                else
+                {
+                    label_entrada_mensual_gastos.Text = "0.00";
+                    label_entrada_mensual_gananciaTotal.Text = label_entrada_mensual_total.Text.ToString();
+                }
             }
+            else
+            {
+                label_entrada_mensual_cantidad.Text = "0";
+                label_entrada_mensual_total.Text = "0.0";
+                label_entrada_mensual_gananciaTotal.Text = "0.0";
+            }
+        }
+
+        private void monthCalendar_entrada_diaria_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            InitializeEntradaDiaria();
+        }
+
+        private void monthCalendar_entrada_mensual_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            InitializeEntradaMensual();
         }
 
         /******************************************FUNCIONES CAJA CHICA *********************************/
         
         void Initilize_CajaChica()
         {
-
-            //******************************calcular datos de cajaChica*******************************
-            //atualizar cantidad inicial y cantidad actual
-            DataTable dt_cajaChica = c.Select(@"SELECT *
-                                                FROM dbo.caja_chica
-                                                WHERE MONTH(dia_hora) = MONTH(dateadd(dd, -1, GetDate()))
-                                                AND
-                                                YEAR(dia_hora) = YEAR(dateadd(dd, -1, GetDate()));");
-            
-            if (dt_cajaChica.Rows.Count == 0)
-            {
-                string fecha_hora = DateTime.Now.ToString(dateformat);
-                c.Insert("INSERT INTO dbo.caja_chica(monto_inicial, monto_actual, gastos ,dia_hora) VALUES(200, 200, 0, '" + fecha_hora + "'); ");
-
-                dt_cajaChica = c.Select(@"SELECT *
-                                        FROM dbo.caja_chica
-                                        WHERE MONTH(dia_hora) = MONTH(dateadd(dd, -1, GetDate()))
-                                        AND
-                                        YEAR(dia_hora) = YEAR(dateadd(dd, -1, GetDate()));");
-            }
-            
-            textBox_cajaChica_montoInicial.Text = dt_cajaChica.Rows[0]["monto_inicial"].ToString();
-            label_cajaChica_montoActual.Text = dt_cajaChica.Rows[0]["monto_actual"].ToString();
-            label_cajaChica_gastos.Text = dt_cajaChica.Rows[0]["gastos"].ToString();
-         
-
-            //actualizar data_grid DE COSTOS
-            DataTable dt_resumen = c.Select(@"SELECT codigo AS Codigo, dia_hora AS 'Fecha y Hora' , descripcion AS Descripcion, costo AS Costo
-                                                FROM dbo.gastos
-                                                WHERE MONTH(dia_hora) = MONTH(dateadd(dd, -1, GetDate()))
-                                                AND
-                                                YEAR(dia_hora) = YEAR(dateadd(dd, -1, GetDate()))
-                                                Order by dia_hora DESC;");
-
-            dataGridView_cajachica_resumen.DataSource = dt_resumen;
-            
-
-            //actualizar los gastos de la entrada mensual y diaria
-            //entrada mensual
-            string gastos_ = dt_cajaChica.Rows[0]["gastos"].ToString();
-
-            decimal gastos = decimal.Parse(gastos_);
-            decimal ganancia = decimal.Parse(label_entrada_mensual_total.Text.ToString());
-
-            label_entrada_mensual_gastos.Text = gastos_;
-            label_entrada_mensual_gananciaTotal.Text = (ganancia - gastos).ToString();
-           
-            //entrada diaria
-            //label_entrada_diaria_gananciaTotal = label_cajaChica_gastos;
-            
-        }
-
-
-        private void monthCalendar_cajaChica_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            DateTime d = monthCalendar_entrada_mensual.SelectionRange.Start;
+            DateTime d = monthCalendar_cajaChica.SelectionRange.Start;
             string month = d.Month.ToString();
             string year = d.Year.ToString();
 
-            //actualizar labels cajaCHica
-            DataTable dt_cajaChica = c.Select(@"SELECT *
-                                        FROM dbo.caja_chica
-                                        WHERE MONTH(dia_hora) = MONTH(dia_hora) = '" + month + @"'
-                                        AND
-                                        YEAR(dia_hora) = '" + year + @"'
-                                        Order by dia_hora DESC;");
-
-            if (dt_cajaChica.Rows.Count == 0) {
-                MessageBox.Show("No hubo caja chica en el mes seleccionado");
-                return;
-            }
-
-            textBox_cajaChica_montoInicial.Text = dt_cajaChica.Rows[0]["monto_inicial"].ToString();
-            label_cajaChica_montoActual.Text = dt_cajaChica.Rows[0]["monto_actual"].ToString();
-            label_cajaChica_gastos.Text = dt_cajaChica.Rows[0]["gastos"].ToString();
-            
-            //actualizar data_grid DE COSTOS
             DataTable dt_resumen = c.Select(@"SELECT codigo AS Codigo, dia_hora AS 'Fecha y Hora' , descripcion AS Descripcion, costo AS Costo
                                     FROM dbo.gastos
-                                    WHERE MONTH(dia_hora) = MONTH(dia_hora) = '" + month + @"'
+                                    WHERE MONTH(dia_hora) = '" + month + @"'
                                     AND
                                     YEAR(dia_hora) = '" + year + @"'
                                     Order by dia_hora DESC;");
 
             dataGridView_cajachica_resumen.DataSource = dt_resumen;
+            for (int i = 0; i < dataGridView_cajachica_resumen.Columns.Count; ++i)
+                dataGridView_cajachica_resumen.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
+            DataTable calculo_mensual_gastos = c.Select(@"SELECT Sum(costo) AS gastos
+                                                                FROM dbo.gastos
+                                                                WHERE MONTH(dia_hora) = '" + month + @"'
+                                                                AND
+                                                                YEAR(dia_hora) = '" + year + "';");
+            label_cajaChica_gastos.Text = calculo_mensual_gastos.Rows[0]["gastos"].ToString();
         }
 
-        private void button_cajaChica_actualizarMontoMensual_Click(object sender, EventArgs e)
+
+        private void monthCalendar_cajaChica_DateChanged(object sender, DateRangeEventArgs e)
         {
-            string montoInicial = textBox_cajaChica_montoInicial.Text.ToString();
-            DateTime d = monthCalendar_entrada_mensual.SelectionRange.Start;
-            string month = d.Month.ToString();
-            string year = d.Year.ToString();
-
-            if (c.Update("UPDATE dbo.caja_chica SET monto_actual =" +montoInicial+ " , monto_inicial = " + montoInicial + @" 
-                            WHERE MONTH(dia_hora) = '" + month + @"'
-                            AND
-                            YEAR(dia_hora) = '" + year + @"';"))
-            {
-                MessageBox.Show("Se actualizó el monto inicial del mes");
-            }
-            else
-            {
-                MessageBox.Show("No se registro en los gastos de caja chica");
-            }
-
-            label_cajaChica_montoActual.Text = montoInicial;
+            Initilize_CajaChica();
         }
 
         private void button_cajaChica_realizar_Click(object sender, EventArgs e)
         {
             string descripcion = textBox_cajaChica_desc.Text.ToString();
             string costo = textBox_cajaChica_costo.Text.ToString();
-            string fecha_hora = DateTime.Now.ToString(dateformat);
+
+            DateTime dt = monthCalendar_cajaChica.SelectionRange.Start;
+            string fecha_hora = dt.ToString(dateformat);
 
             if (c.Insert("INSERT INTO dbo.gastos(descripcion, costo, dia_hora) VALUES( '" + descripcion + "', '" + costo + "', '" + fecha_hora + "'); ") ){
                 //update gastos caja chica
                 DateTime d = monthCalendar_entrada_mensual.SelectionRange.Start;
                 string month = d.Month.ToString();
                 string year = d.Year.ToString();
-
-                if (c.Update("UPDATE dbo.caja_chica SET gastos = gastos + " + costo + @" 
-                            WHERE MONTH(dia_hora) = '" + month + @"'
-                            AND
-                            YEAR(dia_hora) = '" + year + @"';"))
-                {
-                    ;
-                }
-                else
-                {
-                    MessageBox.Show("No se registro en los gastos de caja chica");
-                    return;
-                }
 
                 MessageBox.Show("Se registró el gasto");
                 Initilize_CajaChica();
@@ -1101,64 +1097,91 @@ namespace Acix
         ****************************************************************************************************************/
 
         /****************************************************************************************************************
-         *                                             4.0 INICIO HISTORIAL
+         *                                             4.0 INICIO HISTORIAL// NUEVO VENTA
          ****************************************************************************************************************/
-
-        private void button_historial_eliminar_Click(object sender, EventArgs e)
+        private void InitializeVenta()
         {
-            //falta progrmar lo que es el comprobante y la relacion entre historial factura
-            groupBox_historial_advertencia.Visible = true;
+            DateTime d = monthCalendar_venta.SelectionRange.Start;
+            string day = d.Day.ToString();
+            string month = d.Month.ToString();
+            string year = d.Year.ToString();
+
+            DataTable dt_ventas = c.Select(@"SELECT dia_hora AS 'Día y hora', cantidad AS 'Cantidad', descripcion_producto AS 'Descripción del producto', precio_venta AS 'Precio de venta', dbo.comprobante.nombre AS 'Tipo Comprobante', (CAST(dbo.comprobante.serie AS varchar(100))+ ' N° ' +CAST(dbo.comprobante.numero AS varchar(100))) AS 'Numero de Comprobante', dbo.historial.nombres_cliente AS Cliente, detalles_compra AS 'Precios de compra'
+                                            FROM dbo.historial
+                                            LEFT JOIN dbo.comprobante ON dbo.comprobante.cod_historial = dbo.historial.codigo
+                                            WHERE MONTH(dia_hora) = '" + month + @"'
+                                            AND
+                                            YEAR(dia_hora) = '" + year + @"'
+                                            Order by dia_hora DESC;");
+            dataGridView_historial.DataSource = dt_ventas;
+
+            for (int i = 0; i < dataGridView_historial.Columns.Count; ++i)
+                dataGridView_historial.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         }
+
+
+        private void monthCalendar_venta_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            InitializeVenta();
+        }
+
+        private void button_venta_diaria_Click(object sender, EventArgs e)
+        {
+            DateTime d = monthCalendar_venta.SelectionRange.Start;
+            string day = d.Day.ToString();
+            string month = d.Month.ToString();
+            string year = d.Year.ToString();
+
+            DataTable dt_ventas = c.Select(@"SELECT dia_hora AS 'Día y hora', cantidad AS 'Cantidad', descripcion_producto AS 'Descripción del producto', precio_venta AS 'Precio de venta', dbo.comprobante.nombre AS 'Tipo Comprobante', (CAST(dbo.comprobante.serie AS varchar(100))+ ' N° ' +CAST(dbo.comprobante.numero AS varchar(100))) AS 'Numero de Comprobante', dbo.historial.nombres_cliente AS Cliente, detalles_compra AS 'Precios de compra'
+                                            FROM dbo.historial
+                                            LEFT JOIN dbo.comprobante ON dbo.comprobante.cod_historial = dbo.historial.codigo
+                                            WHERE DAY(dia_hora)= '" + day + @"'
+                                            AND
+                                            MONTH(dia_hora) = '" + month + @"'
+                                            AND
+                                            YEAR(dia_hora) = '" + year + @"'
+                                            Order by dia_hora DESC;");
+            dataGridView_historial.DataSource = dt_ventas;
+
+            for (int i = 0; i < dataGridView_historial.Columns.Count; ++i)
+                dataGridView_historial.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        }
+
 
         private void dataGridView_historial_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             indice_aux = e.RowIndex;
-            button_historial_eliminar.Enabled = true;
+            button_historial_modificar.Enabled = true;
         }
 
-        private void button_historial_advertencia_si_Click(object sender, EventArgs e)
+        private void button_historial_modificar_Click(object sender, EventArgs e)
         {
             DataGridViewRow row = dataGridView_historial.Rows[indice_aux];
-            string code_history_to_delete = row.Cells[0].Value.ToString();//codigo
-            string descripcion_history_to_delete = row.Cells[3].Value.ToString();//descripcion
-            string cantidad = row.Cells[4].Value.ToString();//cantidad
+            string codigo = row.Cells[0].Value.ToString();//codigo
+            string date = row.Cells[1].Value.ToString();//date
 
-            string codigo_producto = get_listboxequivalentes_id(descripcion_history_to_delete);//line 179
 
-            DataTable dt = c.Select("SELECT vigente FROM dbo.historial WHERE dbo.historial.codigo = " + code_history_to_delete + ";");
-            if (dt.Rows[0]["vigente"].ToString() == "0")
+            if (c.Update(@" UPDATE dbo.historial
+                        SET dia_hora = '" + date + @"'
+                        WHERE codigo =" + codigo + ";"))
             {
-                MessageBox.Show("No se puede borrar, elemento del historial ya no es vigente");
-                return;
+                MessageBox.Show("Fecha Modificada");
             }
-
-
-            c.Update("UPDATE dbo.producto SET stock = stock +" + cantidad + " WHERE codigo =" + codigo_producto + ";");
-            c.Update("UPDATE dbo.historial SET vigente = 0 WHERE dbo.historial.codigo = " + code_history_to_delete + ";");
-
-            //MessageBox.Show("UPDATE dbo.producto SET stock = stock +" + cantidad + " WHERE codigo =" + codigo_producto + ";");
-            //MessageBox.Show("UPDATE dbo.historial SET vigente = 0 WHERE dbo.historial.codigo = " + code_history_to_delete + ";");
+            else MessageBox.Show("No se pudo modificar correctamente la fecha");
 
             Initialize_data_grids();
-            button_historial_eliminar.Enabled = false;
-            groupBox_historial_advertencia.Visible = false;
-            MessageBox.Show("Elemento del historial borrado");
-        }
-
-        private void button_historial_advertencia_no_Click(object sender, EventArgs e)
-        {
-            groupBox_historial_advertencia.Visible = false;
+            button_historial_modificar.Enabled = false;
         }
 
 
         /****************************************************************************************************************
-         *                                             4.0 FIN HISTORIAL
+         *                                             4.0 FIN HISTORIAL/  VENTA
          ****************************************************************************************************************/
 
         /****************************************************************************************************************
         *                                             5.0 INICIOAnadir equivalentes
         ****************************************************************************************************************/
-        
+
         private void button_anadir_equivalentes_selec_Click(object sender, EventArgs e)
         {
             DataTable dt = c.Select(@"SELECT (CAST(dbo.producto.codigo AS varchar(100))+ ' / ' +CAST(dbo.producto.marca AS varchar(100))+' / ' + CAST(dbo.producto.grado AS varchar(100))+ ' / '+ CAST(dbo.producto.contenido AS varchar(100)) + ' / '+ CAST(dbo.producto.unidad AS varchar(100))) AS description 
@@ -1259,375 +1282,262 @@ namespace Acix
             button_anadir_equivalentes__crear.Enabled = false;
             listBox_anadir_equivalentes.Items.Clear();
         }
-        
+
         /****************************************************************************************************************
         *                                             5.0 FIN Anadir equivalentes
         ****************************************************************************************************************/
 
-
         /****************************************************************************************************************
-        *                                             3.0 INICIO CLIENTES
+        *                                             6.0 INICIO COMPRA
         ****************************************************************************************************************/
-
-        private void Initialize_combobox_clientes_apellido()
-        {
-            //****************************** combo boxes clientes*******************************
-            AutoCompleteStringCollection source = new AutoCompleteStringCollection();
-            DataTable dt_apellido = c.Select("SELECT DISTINCT dbo.cliente.apellidos FROM dbo.cliente;");
-            foreach (DataRow row in dt_apellido.Rows)
-            {
-                source.Add((string)row[0]);
-            }
-            textBox_pedidos_cliente_apellido.AutoCompleteCustomSource = source;
-            textBox_cliente_historia_apellido.AutoCompleteCustomSource = source;
-        }
-        
-        private void button_cliente_nuevo_crear_Click(object sender, EventArgs e)
-        {
-            string nombre = textBox_cliente_nuevo_nombre.Text.ToUpper();
-            string apellido = textBox_cliente_nuevo_apellido.Text.ToUpper();
-            string filtro = textBox_cliente_nuevo_filtro.Text.ToUpper();
-            string marca = textBox_cliente_nuevo_marca.Text.ToUpper();
-            string motor = textBox_cliente_nuevo_motor.Text.ToUpper();
-            string telefono = textBox_cliente_nuevo_telefono.Text.ToUpper();
-            string vehiculo = textBox_cliente_nuevo_vehiculo.Text.ToUpper();
-            string aceite = textBox_cliente_nuevo_aceite.Text.ToUpper();
-
-            if (!c.Insert("INSERT INTO cliente (nombre, apellidos, telefono, marca, vehiculo, motor, tipo_aceite, tipo_filtro) VALUES ('" + nombre + "','" + apellido + "','" + telefono + "','" + marca + "','" + vehiculo + "','" + motor + "','" + aceite + "','" + filtro + "');"))
-            {
-                MessageBox.Show("Error al insertar cliente");
-            }
-            else MessageBox.Show("Cliente añadido exitosamente!");
-
-            Initialize_data_grids();
-            textBox_cliente_nuevo_nombre.Text = "";
-            textBox_cliente_nuevo_apellido.Text = "";
-            textBox_cliente_nuevo_filtro.Text = "";
-            textBox_cliente_nuevo_marca.Text = "";
-            textBox_cliente_nuevo_motor.Text = "";
-            textBox_cliente_nuevo_telefono.Text = "";
-            textBox_cliente_nuevo_vehiculo.Text = "";
-            textBox_cliente_nuevo_aceite.Text = "";
-
-            Initialize_data_grids();
-            button_cliente_nuevo_crear.Enabled = false;
-        }
-        
-        private void textBox_cliente_nuevo_filtro_TextChanged(object sender, EventArgs e)
-        {
-            button_cliente_nuevo_crear.Enabled = true;
-        }
-        
-
-        private void button_cliente_historial_selec_Click(object sender, EventArgs e)
-        {
-            string apellido_cliente = textBox_cliente_historia_apellido.Text.ToString();
-            string nombre_cliente = comboBox_cliente_historia_nombre.Text.ToString();
-
-            label_cliente_historia_nombyap.Text = apellido_cliente + ", " + nombre_cliente;
-
-            DataTable dt_clientes = c.Select(@" SELECT dia_hora AS 'Fecha', descripcion_producto AS 'Descripcion del Producto', cantidad AS 'Cantidad'
-                                                FROM dbo.cliente 
-                                                JOIN dbo.historial ON dbo.cliente.codigo = dbo.historial.cliente_codigo
-                                                WHERE vigente = 1 and dbo.cliente.apellidos LIKE '%" + apellido_cliente + "%' and dbo.cliente.nombre LIKE '%" + nombre_cliente + "%' Order by dia_hora DESC;");
-            dataGridView_cliente_historial.DataSource = dt_clientes;
-            dataGridView_cliente_historial.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-            button_cliente_historial_selec.Enabled = false;
-        }
-
-        private void textBox_cliente_historia_apellido_TextChanged(object sender, EventArgs e)
-        {
-            //line 57
-            if (textBox_cliente_historia_apellido.Text == "") return;
-
-            string contenido = textBox_cliente_historia_apellido.Text.ToString();
-            //--------------------------actualizar combo_box_nombre
-            comboBox_cliente_historia_nombre.Items.Clear(); comboBox_cliente_historia_nombre.Text = "";
-
-
-            DataTable dt = c.Select("SELECT DISTINCT dbo.cliente.nombre FROM dbo.cliente WHERE dbo.cliente.apellidos LIKE '%" + contenido + "%';");
-            foreach (DataRow row in dt.Rows)
-            {
-                comboBox_cliente_historia_nombre.Items.Add((string)row[0]);
-            }
-        }
-
-
-        private void comboBox_cliente_historia_nombre_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (textBox_cliente_historia_apellido.Text != "") button_cliente_historial_selec.Enabled = true;
-        }
-
-        private void dataGridView_listado_clientes_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            indice_aux = e.RowIndex;
-            button_cliente_modificar.Enabled = true;
-        }
-
-        private void button_cliente_listaddo_advertencia_si_Click(object sender, EventArgs e)
-        {
-            DataGridViewRow row = dataGridView_listado_clientes.Rows[indice_aux];
-            string codigo = row.Cells[0].Value.ToString();
-            string nombre = row.Cells[1].Value.ToString();
-            string appelido = row.Cells[2].Value.ToString();
-            string telefono = row.Cells[3].Value.ToString();
-            string marca = row.Cells[4].Value.ToString();
-            string vehiculo = row.Cells[5].Value.ToString();
-            string motor = row.Cells[6].Value.ToString();
-            string aceite = row.Cells[7].Value.ToString();
-            string filtro = row.Cells[8].Value.ToString();
-            //nombre, apellidos, telefono, marca, vehiculo, motor, tipo_aceite, tipo_filtro
-            if (c.Update("UPDATE dbo.cliente SET nombre = '" + nombre + "', apellidos = '" + appelido + "',telefono = '" + telefono + "',marca = '" + marca + "',vehiculo = '" + vehiculo + "',motor = '" + motor + "',tipo_aceite = '" + aceite + "',tipo_filtro = '" + filtro + "' WHERE dbo.cliente.codigo = " + codigo + ";"))
-            {
-                MessageBox.Show("Cliente Actualizado");
-            }
-            else
-            {
-                MessageBox.Show("No se pudo actualizar cliente");
-            }
-
-            Initialize_data_grids();
-            groupBox_clientes_listado_advertencia.Visible = false;
-        }
-
-        private void button_cliente_listaddo_advertencia_no_Click(object sender, EventArgs e)
-        {
-            groupBox_clientes_listado_advertencia.Visible = false;
-        }
-
-        private void button_cliente_modificar_Click(object sender, EventArgs e)
-        {
-
-            groupBox_clientes_listado_advertencia.Visible = true;
-            button_cliente_modificar.Enabled = false;
-
-        }
-
-        /****************************************************************************************************************
-        *                                             3.0 FIN CLIENTES
-        ****************************************************************************************************************/
-
-        /****************************************************************************************************************
-        *                                             6.0 INICIO PROVEEDOR
-        ****************************************************************************************************************/
-
-        private void Initialize_comboBox_proveedor()
-        {
-            DataTable dt = c.Select("SELECT DISTINCT dbo.proveedor.nombre FROM dbo.proveedor;");
-
-            foreach (DataRow row in dt.Rows)
-            {
-                cbox_proveedor_nombre.Items.Add((string)row[0]);
-            }
-        }
-
-        private void cbox_proveedor_nombre_SelectedValueChanged(object sender, EventArgs e)
-        {
-            button_proveedor_selec_proveedor.Enabled = true;
-        }
-
-        private void button_proveedor_selec_proveedor_Click(object sender, EventArgs e)
-        {
-            label_preoveedor_anadir_proveedor.Text = cbox_proveedor_nombre.Text;
-            cbox_proveedor_nombre.Text = "";
-            button_proveedor_selec_proveedor.Enabled = false;
-        }
-
-        //**********************************************INICIO DE BUSCAR PRODUCTO*****************************************************
-        //**********************************************INICIO DE BUSCAR PRODUCTO*****************************************************
 
         //inicio actualizacion de combo boxes
-        public void Initialize_combobox_proveedor_contenidoProducto()
+        public void Initialize_combobox_compra_contenido()
         {
-            cBox_proveedor_contenido.Items.Clear(); cBox_proveedor_contenido.Text = "";
-            cBox_proveedor_marca.Items.Clear(); cBox_proveedor_marca.Text = "";
-            cBox_proveedor_grado.Items.Clear(); cBox_proveedor_grado.Text = "";
-            cBox_proveedor_Unidad.Items.Clear(); cBox_proveedor_Unidad.Text = "";
+            //INICIO inicializar combobox
+            comboBox_compra_contenido.Items.Clear(); comboBox_compra_contenido.Text = "";
+            comboBox_compra_marca.Items.Clear(); comboBox_compra_marca.Text = "";
+            comboBox_compra_grado.Items.Clear(); comboBox_compra_grado.Text = "";
+            comboBox_compra_unidad.Items.Clear(); comboBox_compra_unidad.Text = "";
 
-            cbox_proveedor_nombre.Items.Clear(); cbox_proveedor_nombre.Text = "";
             DataTable dt = c.Select("SELECT DISTINCT dbo.producto.contenido FROM dbo.producto;");
 
             foreach (DataRow row in dt.Rows)
             {
-                cBox_proveedor_contenido.Items.Add((string)row[0]);
+                comboBox_compra_contenido.Items.Add((string)row[0]);
             }
+            ///-----FIN COMBOBOX-----------
         }
-
-        private void cBox_proveedor_contenido_SelectedValueChanged(object sender, EventArgs e)
+     
+        private void comboBox_compra_contenido_SelectedValueChanged(object sender, EventArgs e)
         {
+            comboBox_compra_marca.Items.Clear(); comboBox_compra_marca.Text = "";
+            comboBox_compra_grado.Items.Clear(); comboBox_compra_grado.Text = "";
+            comboBox_compra_unidad.Items.Clear(); comboBox_compra_unidad.Text = "";
 
-            cBox_proveedor_marca.Items.Clear(); cBox_proveedor_marca.Text = "";
-            cBox_proveedor_grado.Items.Clear(); cBox_proveedor_grado.Text = "";
-            cBox_proveedor_Unidad.Items.Clear(); cBox_proveedor_Unidad.Text = "";
-
-            string contenido = cBox_proveedor_contenido.Text;
+            string contenido = comboBox_compra_contenido.Text;
             DataTable dt = c.Select("SELECT DISTINCT dbo.producto.marca FROM dbo.producto WHERE dbo.producto.contenido LIKE '%" + contenido + "%';");
             foreach (DataRow row in dt.Rows)
             {
-                cBox_proveedor_marca.Items.Add((string)row[0]);
+                comboBox_compra_marca.Items.Add((string)row[0]);
             }
         }
+    
 
-        private void cBox_proveedor_marca_SelectedValueChanged(object sender, EventArgs e)
+        private void comboBox_compra_marca_SelectedValueChanged(object sender, EventArgs e)
         {
-            cBox_proveedor_grado.Items.Clear(); cBox_proveedor_grado.Text = "";
-            cBox_proveedor_Unidad.Items.Clear(); cBox_proveedor_Unidad.Text = "";
+            comboBox_compra_grado.Items.Clear(); comboBox_compra_grado.Text = "";
+            comboBox_compra_unidad.Items.Clear(); comboBox_compra_unidad.Text = "";
+
+            string marca = comboBox_compra_marca.Text;
+            string contenido = comboBox_compra_contenido.Text;
 
             DataTable dt = c.Select(@"SELECT DISTINCT dbo.producto.grado 
-                                    FROM dbo.producto
-                                    WHERE dbo.producto.marca LIKE '%" + cBox_proveedor_marca.Text + "%' AND dbo.producto.contenido LIKE '%" + cBox_proveedor_contenido.Text + "%';");
+                                        FROM dbo.producto
+                                        WHERE dbo.producto.marca LIKE '%" + marca + "%' AND dbo.producto.contenido LIKE '%" + contenido + "%';");
             foreach (DataRow row in dt.Rows)
             {
-                cBox_proveedor_grado.Items.Add((string)row[0]);
+                comboBox_compra_grado.Items.Add((string)row[0]);
             }
         }
 
-        private void cBox_proveedor_grado_SelectedValueChanged(object sender, EventArgs e)
+        private void comboBox_compra_grado_SelectedValueChanged(object sender, EventArgs e)
         {
-            cBox_proveedor_Unidad.Items.Clear(); cBox_proveedor_Unidad.Text = "";
+            comboBox_compra_unidad.Items.Clear(); comboBox_compra_unidad.Text = "";
+
+            string grado = comboBox_compra_grado.Text;
+            string marca = comboBox_compra_marca.Text;
+            string contenido = comboBox_compra_contenido.Text;
 
             DataTable dt = c.Select(@"SELECT DISTINCT dbo.producto.unidad 
                                     FROM dbo.producto 
-                                    WHERE dbo.producto.marca LIKE '%" + cBox_proveedor_marca.Text + "%' AND dbo.producto.grado LIKE '%" + cBox_proveedor_grado.Text + "%' AND dbo.producto.contenido LIKE '%" + cBox_proveedor_contenido.Text + "%';");
+                                    WHERE dbo.producto.marca LIKE '%" + marca + "%' AND dbo.producto.grado LIKE '%" + grado + "%' AND dbo.producto.contenido LIKE '%" + contenido + "%';");
             foreach (DataRow row in dt.Rows)
             {
-                cBox_proveedor_Unidad.Items.Add((string)row[0]);
+                comboBox_compra_unidad.Items.Add((string)row[0]);
             }
         }
 
-        private void button_proveedor_selec_producto_Click(object sender, EventArgs e)
+        //fin actualizacion de combo boxes
+
+
+        private void button_compra_seleccionar_Click(object sender, EventArgs e)
+        {
+            //get Item from list
+            DataRowView row = listBox_compra.SelectedItem as DataRowView;
+            string cod = row["codigo"].ToString();
+            string descripcion = row["description"].ToString();
+            //end
+
+            label_compra_producto.Text = descripcion;
+
+            button_compra_seleccionar.Enabled = false;
+            groupBox_compra_resultado.Visible = false;
+        }
+
+        private void button_compra_cerrar_Click(object sender, EventArgs e)
+        {
+            button_compra_seleccionar.Enabled = false;
+            groupBox_compra_resultado.Visible = false;
+        }
+
+        private void button_compra_buscar_Click(object sender, EventArgs e)
         {
             DataTable dt = c.Select(@"SELECT dbo.producto.codigo, (CAST(dbo.producto.codigo AS varchar(100))+ ' / ' +CAST(dbo.producto.marca AS varchar(100))+' / ' + CAST(dbo.producto.grado AS varchar(100))+ ' / '+ CAST(dbo.producto.contenido AS varchar(100)) + ' / '+ CAST(dbo.producto.unidad AS varchar(100))) AS description 
                                     FROM dbo.producto
-                                    WHERE dbo.producto.marca LIKE '%" + cBox_proveedor_marca.Text + "%' AND dbo.producto.grado LIKE '%" + cBox_proveedor_grado.Text + "%' AND dbo.producto.contenido LIKE '%" + cBox_proveedor_contenido.Text + "%' AND dbo.producto.unidad LIKE '%" + cBox_proveedor_Unidad.Text + "%';");
-            listBox_proveedor_resultadoProducto.DataSource = dt;
-            listBox_proveedor_resultadoProducto.ValueMember = "codigo";
-            listBox_proveedor_resultadoProducto.DisplayMember = "description";
+                                    WHERE dbo.producto.marca LIKE '%" + comboBox_compra_marca.Text + "%' AND dbo.producto.grado LIKE '%" + comboBox_compra_grado.Text + "%' AND dbo.producto.contenido LIKE '%" + comboBox_compra_contenido.Text + "%' AND dbo.producto.unidad LIKE '%" + comboBox_compra_unidad.Text + "%';");
 
-            groupBox_proveedor_resultadoProductos.Visible = true;
-            if (listBox_proveedor_resultadoProducto.Items.Count > 0)
-                button_proveedor_resultado_selec.Enabled = true;
+            listBox_compra.DisplayMember = "description";
+            listBox_compra.ValueMember = "codigo";
+            listBox_compra.DataSource = dt;
+            listBox_compra.BindingContext = this.BindingContext;
+
+            groupBox_compra_resultado.Visible = true;
         }
 
-        private void button_proveedor_resultado_selec_Click(object sender, EventArgs e)
+        private void listBox_compra_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //get Item from list
-            DataRowView row = listBox_proveedor_resultadoProducto.SelectedItem as DataRowView;
-            string cod = row["Codigo"].ToString();
-            //end
-
-            cur_product = c.Select(@"SELECT dbo.producto.codigo AS Codigo, dbo.producto.stock AS Stock, dbo.producto.precio_venta AS Precio_venta, dbo.producto.precio_compra AS Precio_compra, (CAST(dbo.producto.codigo AS varchar(100))+ ' / ' +CAST(dbo.producto.marca AS varchar(100))+' / ' + CAST(dbo.producto.grado AS varchar(100))+ ' / '+ CAST(dbo.producto.contenido AS varchar(100)) + ' / '+ CAST(dbo.producto.unidad AS varchar(100))) AS description 
-                                    FROM dbo.producto
-                                    WHERE dbo.producto.codigo = " + cod + "; ");
-
-            label_preoveedor_anadir_desc_producto.Text = cur_product.Rows[0]["description"].ToString();
-
-            groupBox_proveedor_resultadoProductos.Visible = false;
-            button_proveedor_anadir.Enabled = true;
+            button_compra_seleccionar.Enabled = true;
         }
 
-        private void button_proveedor_resultado_cerrar_Click(object sender, EventArgs e)
+        private void clear_pedidos_compra()
         {
-            groupBox_proveedor_resultadoProductos.Visible = false;
-        }
-        //**********************************************FIN DE BUSCAR PRODUCTO*****************************************************
-        //**********************************************FIN DE BUSCAR PRODUCTO*****************************************************
+            //search_group
+            comboBox_compra_marca.Text = "";
+            comboBox_compra_grado.Text = "";
+            comboBox_compra_contenido.Text = "";
+            comboBox_compra_unidad.Text = "";
 
-        private void button_proveedor_anadir_Click(object sender, EventArgs e)
+            textBox_compra_proveedor.Text = "";
+            textBox_compra_cantidad.Text = "";
+            textBox_compra_precio.Text = "";
+
+            label_compra_producto.Text = "___";
+        }
+
+        private void button_compra_comprar_Click(object sender, EventArgs e)
         {
-            string codigo_producto = cur_product.Rows[0]["codigo"].ToString();
-            string proveedor_nombre = label_preoveedor_anadir_proveedor.Text.ToString();
-            //update
-            if (!c.Insert(@"update dbo.producto
-                set proveedor_nombre = '" + proveedor_nombre + "'where codigo = " + codigo_producto  + "; "))
+            if (textBox_compra_proveedor.Text == "")
             {
-                MessageBox.Show("Error al añadir proveedor al producto");
+                MessageBox.Show("Falta ingresar el proveedor");
+                return; 
+            }
+
+            if (textBox_compra_cantidad.Text == "")
+            {
+                MessageBox.Show("Falta ingresar la cantidad");
+                return;
+            }
+
+            if(textBox_compra_precio.Text == "")
+            {
+                MessageBox.Show("Falta ingresar el precio de compra");
+                return;
+            }
+
+            //---datos generales de la generacion de la venta
+            DateTime d = compra_calendar.SelectionRange.Start;
+            TimeSpan ts = DateTime.Now.TimeOfDay;
+            d = d.Date + ts;
+            string fecha_hora = d.ToString(dateformat);//se cambia el formato de la fecha
+
+            string desc = label_compra_producto.Text.ToString();
+            string codigo = get_listboxequivalentes_id(desc);
+
+            string proveedor = textBox_compra_proveedor.Text.ToString();
+            string cantidad = textBox_compra_cantidad.Text.ToString();
+            string precio = textBox_compra_precio.Text.ToString();
+
+            //Inicio Transacciones bd
+            c.Update("UPDATE dbo.producto SET stock = stock +" + cantidad + " WHERE codigo =" + codigo + ";");
+            string stock = c.Select("SELECT stock FROM dbo.producto WHERE codigo =" + codigo + ";").Rows[0]["stock"].ToString();
+
+            if (c.Insert("INSERT INTO dbo.compra (descripcion_producto, proveedor, dia_hora, cantidad, cantidad_vigente, precio_compra, codigo_producto, cantidad_actual) VALUES ('" + desc + "','" + proveedor + "','" + fecha_hora + "'," + cantidad + "," + cantidad + "," + precio + "," + codigo + "," + stock + ");"))
+            {
+                MessageBox.Show("Compra exitosa!");
+                //actualizar dataGridView_historial
+                Initialize_data_grids();
             }
             else
             {
-                MessageBox.Show("Proveedor añadido a producto exitosamente!");
+                MessageBox.Show("Falló al registrar compra");
             }
+            //fin transacciones bd
 
-            Initialize_data_grids();
-            button_proveedor_anadir.Enabled = false;
-            label_preoveedor_anadir_desc_producto.Text = "";
-            label_preoveedor_anadir_proveedor.Text = "";
-        }
-        
-        //**********************************************NUEVO PROVEDOR*****************************************************
-
-        private void button_proveedor_nuevo_crear_Click(object sender, EventArgs e)
-        {
-            string proveedor_nombre = textBox_proveedor_nuevo_nombre.Text.ToUpper();
-            string proveedor_direccion = textBox_proveedor_nuevo_direccion.Text.ToUpper();
-            string proveedor_telefono = textBox_proveedor_nuevo_telefono.Text.ToUpper();
-            
-            if (!c.Insert("INSERT INTO proveedor(nombre, direccion, telefono) VALUES('" + proveedor_nombre + "', '" + proveedor_direccion + "', '" + proveedor_telefono + "');"))
-            {
-                MessageBox.Show("Error al crear proveedor");
-            }
-            else
-            {
-                MessageBox.Show("Proveedor creado exitosamente!");
-            }
-
-            Initialize_data_grids();
-            button_proveedor_nuevo_crear.Enabled = false;
-            textBox_proveedor_nuevo_nombre.Text = "";
-            textBox_proveedor_nuevo_direccion.Text = "";
-            textBox_proveedor_nuevo_telefono.Text = "";
-        }
-
-        private void textBox_proveedor_nuevo_telefono_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox_proveedor_nuevo_telefono.Text != "") button_proveedor_nuevo_crear.Enabled = true;
-        }
-
-        //**************************************actualizar proveedor
-
-        private void dataGridView_proveedor_listado_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            indice_aux = e.RowIndex;
-            button_proveedor_listado_modificar.Enabled = true;
-        }
-
-
-        private void button_proveedor_listado_modificar_Click(object sender, EventArgs e)
-        {
-            groupBox_proveedor_listado_advertencia.Visible = true;
-            button_proveedor_listado_modificar.Enabled = false;
-        }
-
-        private void button_proveedor_advertencia_si_Click(object sender, EventArgs e)
-        {
-            DataGridViewRow row = dataGridView_proveedor_listado.Rows[indice_aux];
-            string codigo = row.Cells[0].Value.ToString();
-            string nombre = row.Cells[1].Value.ToString();
-            string telefono = row.Cells[2].Value.ToString();
-            string direccion = row.Cells[3].Value.ToString();
-
-            //nombre, direccion, telefono
-            if (c.Update("UPDATE dbo.proveedor SET nombre = '" + nombre + "', telefono = '" + telefono + "',direccion = '" + direccion + "' WHERE dbo.proveedor.codigo = " + codigo + ";"))
-            {
-                MessageBox.Show("Proveedor Actualizado");
-            }
-            else
-            {
-                MessageBox.Show("No se pudo actualizar proveedor");
-            }
-
-            Initialize_data_grids();
-            groupBox_proveedor_listado_advertencia.Visible = false;
-        }
-
-        private void button_proveedor_advertencia_no_Click(object sender, EventArgs e)
-        {
-            groupBox_proveedor_listado_advertencia.Visible = false;
+            clear_pedidos_compra();
         }
 
         /****************************************************************************************************************
-*                                             6.0 FIN PROVEEDOR
-****************************************************************************************************************/
+        *                                             6.0 FIN COMPRA
+        ****************************************************************************************************************/
+
+        /****************************************************************************************************************
+        *                                             7.0 INICIO KARDEX
+        ****************************************************************************************************************/
+
+        private void button_kardex_buscar_Click(object sender, EventArgs e)
+        {
+             string desc = textBox_kardex_buscar.Text.ToString();
+
+            DataTable dt = c.Select(@"SELECT dbo.producto.codigo, (CAST(dbo.producto.codigo AS varchar(100))+ ' / ' +CAST(dbo.producto.marca AS varchar(100))+' / ' + CAST(dbo.producto.grado AS varchar(100))+ ' / '+ CAST(dbo.producto.contenido AS varchar(100)) + ' / '+ CAST(dbo.producto.unidad AS varchar(100))) AS description 
+                                    FROM dbo.producto
+                                    WHERE dbo.producto.marca LIKE '%" + desc + "%' OR dbo.producto.grado LIKE '%" + desc + "%' OR dbo.producto.contenido LIKE '%" + desc + "%' OR dbo.producto.unidad LIKE '%" + desc  + "%';");
+
+            listBox_kardex_resultado.DisplayMember = "description";
+            listBox_kardex_resultado.ValueMember = "codigo";
+            listBox_kardex_resultado.DataSource = dt;
+            listBox_kardex_resultado.BindingContext = this.BindingContext;
+
+            groupBox_kardex.Visible = true;
+        }
+
+        private void button_kardex_selec_Click(object sender, EventArgs e)
+        {
+            //get Item from list
+            DataRowView row = listBox_kardex_resultado.SelectedItem as DataRowView;
+            string cod = row["codigo"].ToString();
+            string descripcion = row["description"].ToString();
+            //end
+
+            label_kardex_producto.Text = descripcion;
+
+            //inicio actualizar datagrid
+            DataTable dt = c.Select(@"SELECT dia_hora AS Fecha, descripcion_producto AS Producto, cantidad AS Entrada, null AS Salida, cantidad_actual AS Saldo 
+                                    FROM dbo.compra
+                                    WHERE codigo_producto = " + cod + @"
+                                    UNION ALL
+                                    SELECT dia_hora AS Fecha, descripcion_producto AS Producto, null AS Entrada, cantidad AS Salida, cantidad_actual AS Saldo 
+                                    FROM dbo.historial
+                                    WHERE codigo_producto = " + cod + @"
+                                    ORDER BY dia_hora; ");
+            dataGridView_kardex.DataSource = dt;
+            for (int i = 0; i < dataGridView_compra.Columns.Count; ++i)
+                dataGridView_kardex.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //fin actualizar data grid
+
+
+
+            button_kardex_selec.Enabled = false;
+            groupBox_kardex.Visible = false;
+        }
+
+        private void button_kardex_cerrar_Click(object sender, EventArgs e)
+        {
+            button_kardex_selec.Enabled = false;
+            groupBox_kardex.Visible = false;
+        }
+
+        private void listBox_kardex_resultado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button_kardex_selec.Enabled = true;
+        }
+
+
+
+
+        /****************************************************************************************************************
+        *                                             7.0 FIN KARDEX
+        ****************************************************************************************************************/
+
     }
 }
